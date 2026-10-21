@@ -40,27 +40,27 @@
 | **US-034** | Là Người dùng, tôi muốn nhận cảnh báo rét đậm hoặc gió lốc để kịp đưa các chậu cây nhạy cảm vào trong nhà | @senior-dev | CAO | 4 | **HOÀN THÀNH** |
 | **US-035** | Là Người dùng, tôi muốn xem lịch chăm sóc tổng quan dạng Calendar (theo tuần/tháng) để chủ động sắp xếp thời gian | @senior-dev | CAO | 5 | **HOÀN THÀNH** |
 | **US-036** | Là Người dùng, tôi muốn kích hoạt chế độ 'Đi vắng/Nghỉ dưỡng' để tạm dừng thông báo nhắc nhở khi không có ở nhà | @senior-dev | CAO | 4 | **HOÀN THÀNH** |
-| **US-037** | Là Kỹ sư AI, tôi muốn thu thập và tiền xử lý bộ dữ liệu ảnh lá cây bệnh (PlantVillage, Kaggle và tập ảnh thực tế tại các vườn đô thị) | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-038** | Là Kỹ sư AI, tôi muốn áp dụng kỹ thuật Data Augmentation (xoay, lật, đổi độ sáng) để tăng tính đa dạng và chống Overfitting cho mô hình | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-039** | Là Kỹ sư AI, tôi muốn huấn luyện mô hình Transfer Learning (MobileNetV3 / YOLOv8-Nano) để phân loại 25+ loại sâu bệnh phổ biến trên cây đô thị | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-040** | Là Kỹ sư AI, tôi muốn đánh giá mô hình trên tập kiểm thử độc lập bằng ma trận Confusion Matrix để đo lường Precision, Recall và F1-Score | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-041** | Là Kỹ sư AI, tôi muốn tối ưu hóa lượng tử hóa mô hình (Post-Training Quantization sang TFLite INT8/FP16) để nén kích thước mô hình dưới 15MB | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-042** | Là Lập trình viên, tôi muốn tích hợp mô hình TFLite trực tiếp vào ứng dụng di động để thực hiện suy luận cục bộ (On-Device Inference) không cần kết nối mạng | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-043** | Là Kỹ sư AI, tôi muốn đo lường độ trễ (latency <200ms) và mức tiêu thụ pin khi suy luận trên thiết bị di động để đảm bảo trải nghiệm mượt mà | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-044** | Là Kỹ sư AI, tôi muốn xây dựng pipeline kiểm tra độ lệch phân phối dữ liệu (Data Drift) để theo dõi độ chính xác trong thực tế | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-045** | Là Kỹ sư AI, tôi muốn tích hợp cơ chế dự phòng gửi ảnh lên Cloud Server phân tích khi ảnh đầu vào quá phức tạp hoặc chất lượng kém | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-046** | Là Kỹ sư AI, tôi muốn nghiên cứu mô hình tách nền lá cây (Background Removal) để loại bỏ nhiễu môi trường trước khi đưa vào phân loại bệnh | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-047** | Là Kỹ sư AI, tôi muốn xây dựng cơ chế thu thập mẫu ảnh chẩn đoán sai do người dùng phản hồi để phục vụ tái huấn luyện mô hình (Active Learning) | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-048** | Là Lập trình viên, tôi muốn mở camera quét trực tiếp lá cây trên ứng dụng với khung ngắm hướng dẫn lấy nét rõ ràng | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-049** | Là Lập trình viên, tôi muốn chọn ảnh chụp có sẵn từ thư viện ảnh điện thoại để thực hiện chẩn đoán khi không thể chụp trực tiếp | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-050** | Là Kỹ sư AI, tôi muốn nhận cảnh báo tức thì nếu ảnh chụp bị mờ, rung lắc, thiếu sáng hoặc không chứa bộ phận lá cây | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-051** | Là Người dùng, tôi muốn xem kết quả chẩn đoán tên bệnh (tiếng Việt & tên khoa học) kèm tỷ lệ phần trăm độ tin cậy của AI | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-052** | Là Kỹ sư AI, tôi muốn xem bản đồ nhiệt Grad-CAM (Heatmap) khoanh vùng chính xác các vết đốm/tổn thương trên lá để biết AI dựa vào đâu kết luận | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-053** | Là Người dùng, tôi muốn gạt thanh trượt điều chỉnh độ trong suốt của bản đồ nhiệt để so sánh vết bệnh giữa ảnh gốc và ảnh phân tích AI | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-054** | Là Người dùng, tôi muốn xem mức độ nghiêm trọng của bệnh (Giai đoạn nhẹ, trung bình, hay khẩn cấp) để kịp thời đưa ra hành động | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-055** | Là Người dùng, tôi muốn lưu kết quả chẩn đoán vào hồ sơ bệnh án của cây trong 'Vườn của tôi' để theo dõi diễn tiến sau điều trị | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-056** | Là Người dùng, tôi muốn chia sẻ kết quả quét bệnh kèm ảnh chụp lên mạng xã hội hoặc hội nhóm cây cảnh để xin ý kiến cộng đồng | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-057** | Là Người dùng, tôi muốn bấm nút 'Phản hồi kết quả chưa đúng' để gửi phản hồi kèm mô tả thực tế về hệ thống | - | CAO | - | CHƯA HOÀN THÀNH |
+| **US-037** | Là Kỹ sư AI, tôi muốn thu thập và tiền xử lý bộ dữ liệu ảnh lá cây bệnh (PlantVillage, Kaggle và tập ảnh thực tế tại các vườn đô thị) | @ml-engineer | CAO | 15 | **HOÀN THÀNH** |
+| **US-038** | Là Kỹ sư AI, tôi muốn áp dụng kỹ thuật Data Augmentation (xoay, lật, đổi độ sáng) để tăng tính đa dạng và chống Overfitting cho mô hình | @ml-engineer | CAO | 10 | **HOÀN THÀNH** |
+| **US-039** | Là Kỹ sư AI, tôi muốn huấn luyện mô hình Transfer Learning (MobileNetV3 / YOLOv8-Nano) để phân loại 25+ loại sâu bệnh phổ biến trên cây đô thị | @ml-engineer | CAO | 20 | **HOÀN THÀNH** |
+| **US-040** | Là Kỹ sư AI, tôi muốn đánh giá mô hình trên tập kiểm thử độc lập bằng ma trận Confusion Matrix để đo lường Precision, Recall và F1-Score | @ml-engineer | CAO | 8 | **HOÀN THÀNH** |
+| **US-041** | Là Kỹ sư AI, tôi muốn tối ưu hóa lượng tử hóa mô hình (Post-Training Quantization sang TFLite INT8/FP16) để nén kích thước mô hình dưới 15MB | @ml-engineer | CAO | 10 | **HOÀN THÀNH** |
+| **US-042** | Là Lập trình viên, tôi muốn tích hợp mô hình TFLite trực tiếp vào ứng dụng di động để thực hiện suy luận cục bộ (On-Device Inference) không cần kết nối mạng | @senior-dev | CAO | 12 | **HOÀN THÀNH** |
+| **US-043** | Là Kỹ sư AI, tôi muốn đo lường độ trễ (latency <200ms) và mức tiêu thụ pin khi suy luận trên thiết bị di động để đảm bảo trải nghiệm mượt mà | @ml-engineer | CAO | 6 | **HOÀN THÀNH** |
+| **US-044** | Là Kỹ sư AI, tôi muốn xây dựng pipeline kiểm tra độ lệch phân phối dữ liệu (Data Drift) để theo dõi độ chính xác trong thực tế | @ml-engineer | CAO | 8 | **HOÀN THÀNH** |
+| **US-045** | Là Kỹ sư AI, tôi muốn tích hợp cơ chế dự phòng gửi ảnh lên Cloud Server phân tích khi ảnh đầu vào quá phức tạp hoặc chất lượng kém | @senior-dev | CAO | 6 | **HOÀN THÀNH** |
+| **US-046** | Là Kỹ sư AI, tôi muốn nghiên cứu mô hình tách nền lá cây (Background Removal) để loại bỏ nhiễu môi trường trước khi đưa vào phân loại bệnh | @ml-engineer | CAO | 8 | **HOÀN THÀNH** |
+| **US-047** | Là Kỹ sư AI, tôi muốn xây dựng cơ chế thu thập mẫu ảnh chẩn đoán sai do người dùng phản hồi để phục vụ tái huấn luyện mô hình (Active Learning) | @ml-engineer | CAO | 8 | **HOÀN THÀNH** |
+| **US-048** | Là Lập trình viên, tôi muốn mở camera quét trực tiếp lá cây trên ứng dụng với khung ngắm hướng dẫn lấy nét rõ ràng | @senior-dev | CAO | 8 | **HOÀN THÀNH** |
+| **US-049** | Là Lập trình viên, tôi muốn chọn ảnh chụp có sẵn từ thư viện ảnh điện thoại để thực hiện chẩn đoán khi không thể chụp trực tiếp | @senior-dev | CAO | 4 | **HOÀN THÀNH** |
+| **US-050** | Là Kỹ sư AI, tôi muốn nhận cảnh báo tức thì nếu ảnh chụp bị mờ, rung lắc, thiếu sáng hoặc không chứa bộ phận lá cây | @ml-engineer | CAO | 6 | **HOÀN THÀNH** |
+| **US-051** | Là Người dùng, tôi muốn xem kết quả chẩn đoán tên bệnh (tiếng Việt & tên khoa học) kèm tỷ lệ phần trăm độ tin cậy của AI | @senior-dev | CAO | 5 | **HOÀN THÀNH** |
+| **US-052** | Là Kỹ sư AI, tôi muốn xem bản đồ nhiệt Grad-CAM (Heatmap) khoanh vùng chính xác các vết đốm/tổn thương trên lá để biết AI dựa vào đâu kết luận | @ml-engineer | CAO | 10 | **HOÀN THÀNH** |
+| **US-053** | Là Người dùng, tôi muốn gạt thanh trượt điều chỉnh độ trong suốt của bản đồ nhiệt để so sánh vết bệnh giữa ảnh gốc và ảnh phân tích AI | @senior-dev | CAO | 6 | **HOÀN THÀNH** |
+| **US-054** | Là Người dùng, tôi muốn xem mức độ nghiêm trọng của bệnh (Giai đoạn nhẹ, trung bình, hay khẩn cấp) để kịp thời đưa ra hành động | @senior-dev | CAO | 4 | **HOÀN THÀNH** |
+| **US-055** | Là Người dùng, tôi muốn lưu kết quả chẩn đoán vào hồ sơ bệnh án của cây trong 'Vườn của tôi' để theo dõi diễn tiến sau điều trị | @senior-dev | CAO | 5 | **HOÀN THÀNH** |
+| **US-056** | Là Người dùng, tôi muốn chia sẻ kết quả quét bệnh kèm ảnh chụp lên mạng xã hội hoặc hội nhóm cây cảnh để xin ý kiến cộng đồng | @senior-dev | CAO | 4 | **HOÀN THÀNH** |
+| **US-057** | Là Người dùng, tôi muốn bấm nút 'Phản hồi kết quả chưa đúng' để gửi phản hồi kèm mô tả thực tế về hệ thống | @senior-dev | CAO | 5 | **HOÀN THÀNH** |
 | **US-058** | Là Người dùng, tôi muốn xem danh sách các bệnh có triệu chứng tương đồng (Top 3 chẩn đoán khả dĩ) để có cái nhìn tổng quan | - | CAO | - | CHƯA HOÀN THÀNH |
 | **US-059** | Là Người dùng, tôi muốn trả lời bảng câu hỏi xác thực triệu chứng vật lý (ví dụ: phấn trắng có lau sạch được không, mặt dưới lá có mạng nhện không) | - | CAO | - | CHƯA HOÀN THÀNH |
 | **US-060** | Là Người dùng, tôi muốn xem hình ảnh mẫu minh họa của từng câu hỏi triệu chứng để dễ dàng so sánh với thực tế cây của mình | - | CAO | - | CHƯA HOÀN THÀNH |

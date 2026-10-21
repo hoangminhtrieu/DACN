@@ -5,6 +5,8 @@ import 'package:urban_plants/features/garden/screens/my_garden_screen.dart';
 import 'package:urban_plants/features/schedule/screens/smart_schedule_and_weather_screen.dart';
 import 'package:urban_plants/features/profile/screens/profile_screen.dart';
 
+import 'package:urban_plants/features/diagnosis/screens/ai_camera_scanner_screen.dart';
+
 class HomeDashboardScreen extends StatefulWidget {
   final Map<String, dynamic> userData;
   const HomeDashboardScreen({super.key, required this.userData});
@@ -35,6 +37,18 @@ class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
       body: IndexedStack(
         index: _currentIndex,
         children: _screens,
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: AppTheme.primaryGreen,
+        elevation: 4,
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => const AICameraScannerScreen()),
+          );
+        },
+        child: const Icon(Icons.qr_code_scanner, color: Colors.white, size: 28),
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,

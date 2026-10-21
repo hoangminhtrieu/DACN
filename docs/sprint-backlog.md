@@ -49,3 +49,32 @@
 | **US-034** | Nhận cảnh báo rét đậm hoặc gió lốc để kịp đưa các chậu cây nhạy cảm vào trong nhà | `@senior-dev` | 4 | **ĐÃ HOÀN THÀNH** |
 | **US-035** | Xem lịch chăm sóc tổng quan dạng Calendar (theo tuần/tháng) để chủ động sắp xếp thời gian | `@senior-dev` | 5 | **ĐÃ HOÀN THÀNH** |
 | **US-036** | Kích hoạt chế độ 'Đi vắng/Nghỉ dưỡng' để tạm dừng thông báo nhắc nhở khi không có ở nhà | `@senior-dev` | 4 | **ĐÃ HOÀN THÀNH** |
+
+---
+
+## Sprint 3 (Ngày 3): AI Core & Camera Quét Bệnh Lá Cây (US-037 đến US-057)
+- **Trạng thái**: **ĐÃ HOÀN THÀNH TOÀN BỘ (21/21 Task)**
+
+| ID | Task Description | Phụ trách | Est. (h) | Status |
+| :--- | :--- | :--- | :--- | :--- |
+| **US-037** | Thu thập và tiền xử lý bộ dữ liệu ảnh lá cây bệnh (PlantVillage, Kaggle & vườn thực tế) | `@ml-engineer` | 15 | **ĐÃ HOÀN THÀNH** |
+| **US-038** | Áp dụng kỹ thuật Data Augmentation (xoay, lật, đổi độ sáng) chống Overfitting | `@ml-engineer` | 10 | **ĐÃ HOÀN THÀNH** |
+| **US-039** | Huấn luyện Transfer Learning (MobileNetV3) phân loại 25+ sâu bệnh cây đô thị | `@ml-engineer` | 20 | **ĐÃ HOÀN THÀNH** |
+| **US-040** | Đánh giá độc lập bằng Confusion Matrix, Precision, Recall và F1-Score | `@ml-engineer` | 8 | **ĐÃ HOÀN THÀNH** |
+| **US-041** | Lượng tử hóa Post-Training Quantization sang TFLite INT8 nén mô hình < 15MB | `@ml-engineer` | 10 | **ĐÃ HOÀN THÀNH** |
+| **US-042** | Tích hợp mô hình TFLite suy luận cục bộ On-Device Offline trên Flutter | `@senior-dev` | 12 | **ĐÃ HOÀN THÀNH** |
+| **US-043** | Đo lường độ trễ (latency < 200ms) và mức tiêu thụ pin khi suy luận trên điện thoại | `@ml-engineer` | 6 | **ĐÃ HOÀN THÀNH** |
+| **US-044** | Xây dựng pipeline kiểm tra độ lệch phân phối dữ liệu (Data Drift) | `@ml-engineer` | 8 | **ĐÃ HOÀN THÀNH** |
+| **US-045** | Cơ chế dự phòng gửi ảnh lên Cloud Server phân tích khi ảnh phức tạp | `@senior-dev` | 6 | **ĐÃ HOÀN THÀNH** |
+| **US-046** | Mô hình tách nền lá cây (Background Removal) loại bỏ nhiễu ban công | `@ml-engineer` | 8 | **ĐÃ HOÀN THÀNH** |
+| **US-047** | Cơ chế thu thập mẫu ảnh chẩn đoán sai từ phản hồi phục vụ Active Learning | `@ml-engineer` | 8 | **ĐÃ HOÀN THÀNH** |
+| **US-048** | Mở camera quét trực tiếp lá cây trên app với khung ngắm hướng dẫn lấy nét | `@senior-dev` | 8 | **ĐÃ HOÀN THÀNH** |
+| **US-049** | Chọn ảnh chụp có sẵn từ thư viện ảnh điện thoại để thực hiện chẩn đoán | `@senior-dev` | 4 | **ĐÃ HOÀN THÀNH** |
+| **US-050** | Cảnh báo thời gian thực nếu ảnh bị mờ, rung lắc, thiếu sáng hoặc không có lá | `@ml-engineer` | 6 | **ĐÃ HOÀN THÀNH** |
+| **US-051** | Hiển thị kết quả chẩn đoán tên bệnh (tiếng Việt & khoa học) kèm % tin cậy AI | `@senior-dev` | 5 | **ĐÃ HOÀN THÀNH** |
+| **US-052** | Vẽ bản đồ nhiệt Grad-CAM Heatmap khoanh vùng tổn thương trên lá | `@ml-engineer` | 10 | **ĐÃ HOÀN THÀNH** |
+| **US-053** | Thanh trượt điều chỉnh độ trong suốt Opacity bản đồ nhiệt so sánh ảnh gốc | `@senior-dev` | 6 | **ĐÃ HOÀN THÀNH** |
+| **US-054** | Hiển thị mức độ nghiêm trọng của bệnh (Nhẹ, trung bình, khẩn cấp) | `@senior-dev` | 4 | **ĐÃ HOÀN THÀNH** |
+| **US-055** | Lưu kết quả chẩn đoán vào hồ sơ bệnh án của cây trong 'Vườn của tôi' | `@senior-dev` | 5 | **ĐÃ HOÀN THÀNH** |
+| **US-056** | Chia sẻ kết quả quét bệnh kèm ảnh chụp lên mạng xã hội/cộng đồng | `@senior-dev` | 4 | **ĐÃ HOÀN THÀNH** |
+| **US-057** | Nút 'Phản hồi kết quả chưa đúng' gửi mô tả thực tế về kho Active Learning | `@senior-dev` | 5 | **ĐÃ HOÀN THÀNH** |

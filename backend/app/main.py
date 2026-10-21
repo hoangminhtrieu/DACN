@@ -4,7 +4,7 @@ from contextlib import asynccontextmanager
 
 from app.core.config import settings
 from app.core.database import engine, Base
-from app.api.v1 import auth, users, admin, garden, weather
+from app.api.v1 import auth, users, admin, garden, weather, diagnosis
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -37,6 +37,7 @@ app.include_router(users.router, prefix=settings.API_V1_PREFIX)
 app.include_router(admin.router, prefix=settings.API_V1_PREFIX)
 app.include_router(garden.router, prefix=settings.API_V1_PREFIX)
 app.include_router(weather.router, prefix=settings.API_V1_PREFIX)
+app.include_router(diagnosis.router, prefix=settings.API_V1_PREFIX)
 
 @app.get("/health", tags=["Health Check"])
 async def health_check():
