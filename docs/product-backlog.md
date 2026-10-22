@@ -61,31 +61,31 @@
 | **US-055** | Là Người dùng, tôi muốn lưu kết quả chẩn đoán vào hồ sơ bệnh án của cây trong 'Vườn của tôi' để theo dõi diễn tiến sau điều trị | @senior-dev | CAO | 5 | **HOÀN THÀNH** |
 | **US-056** | Là Người dùng, tôi muốn chia sẻ kết quả quét bệnh kèm ảnh chụp lên mạng xã hội hoặc hội nhóm cây cảnh để xin ý kiến cộng đồng | @senior-dev | CAO | 4 | **HOÀN THÀNH** |
 | **US-057** | Là Người dùng, tôi muốn bấm nút 'Phản hồi kết quả chưa đúng' để gửi phản hồi kèm mô tả thực tế về hệ thống | @senior-dev | CAO | 5 | **HOÀN THÀNH** |
-| **US-058** | Là Người dùng, tôi muốn xem danh sách các bệnh có triệu chứng tương đồng (Top 3 chẩn đoán khả dĩ) để có cái nhìn tổng quan | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-059** | Là Người dùng, tôi muốn trả lời bảng câu hỏi xác thực triệu chứng vật lý (ví dụ: phấn trắng có lau sạch được không, mặt dưới lá có mạng nhện không) | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-060** | Là Người dùng, tôi muốn xem hình ảnh mẫu minh họa của từng câu hỏi triệu chứng để dễ dàng so sánh với thực tế cây của mình | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-061** | Là Người dùng, tôi muốn hệ thống tự động tái tính toán lại độ tin cậy chẩn đoán sau khi hoàn thành bảng câu hỏi xác thực | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-062** | Là Người dùng, tôi muốn phân biệt rõ rệt giữa tổn thương do nấm bệnh và tổn thương do côn trùng chích hút (bọ trĩ, rệp sáp, nhện đỏ) | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-063** | Là Người dùng, tôi muốn phân biệt giữa hiện tượng cây thiếu vi chất (thiếu sắt, magie, đạm) và bệnh lý truyền nhiễm để tránh dùng sai thuốc | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-064** | Là Người dùng, tôi muốn nhận khuyến cáo mức độ nguy cơ lây lan sang các chậu cây lân cận trong ban công để kịp thời cách ly | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-065** | Là Chuyên gia, tôi muốn hiệu chỉnh bộ quy tắc câu hỏi chẩn đoán phân biệt cho từng loài cây trên trang quản trị | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-066** | Là Người dùng, tôi muốn tải lại các câu hỏi đã trả lời trước đó để đối chiếu sự thay đổi của vết bệnh sau 1 tuần | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-067** | Là Người dùng, tôi muốn bấm một nút micro để hỏi đáp về tình trạng cây bằng giọng nói tiếng Việt khi đang bận tay làm vườn | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-068** | Là Người dùng, tôi muốn hệ thống chuyển giọng nói tiếng Việt thành văn bản (Speech-to-Text) chính xác cả các thuật ngữ cây trồng | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-069** | Là Người dùng, tôi muốn trợ lý AI trả lời câu hỏi chăm sóc cây bằng văn bản ngắn gọn, súc tích và chuẩn chuyên môn | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-070** | Là Người dùng, tôi muốn trợ lý AI tự động đọc to câu trả lời bằng giọng đọc tiếng Việt tự nhiên (Text-to-Speech) để không phải nhìn màn hình | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-071** | Là Người dùng, tôi muốn ra lệnh bằng giọng nói để ghi chú nhật ký cây (ví dụ: 'Hôm nay vừa tỉa lá sâu cho hoa hồng') | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-072** | Là Người dùng, tôi muốn ra lệnh bằng giọng nói để đánh dấu hoàn thành việc tưới nước mà không cần chạm tay dính đất vào màn hình | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-073** | Là Người dùng, tôi muốn xem lại toàn bộ lịch sử các cuộc hội thoại hỏi đáp bằng giọng nói với trợ lý AI | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-074** | Là Người dùng, tôi muốn tùy chỉnh tốc độ đọc và giọng đọc (nam/nữ, Bắc/Nam) của trợ lý ảo để phù hợp với sở thích | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-075** | Là Người dùng, tôi muốn xem phác đồ điều trị 3 bước chuẩn an toàn: Cách ly -> Xử lý hữu cơ sinh học -> Thuốc đặc trị khi trở nặng | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-076** | Là Người dùng, tôi muốn xem hướng dẫn chi tiết cách tự pha chế dung dịch hữu cơ tại nhà (nước tỏi ớt, baking soda, dầu neem) để trị bệnh nhẹ | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-077** | Là Người dùng, tôi muốn xem thông tin tên hoạt chất thuốc bảo vệ thực vật sinh học an toàn cho người và thú cưng trong nhà | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-078** | Là Người dùng, tôi muốn xem video/hình ảnh minh họa cách cắt tỉa cành lá bị nhiễm nấm đúng kỹ thuật tránh lây lan mầm bệnh | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-079** | Là Người dùng, tôi muốn hệ thống tự động tạo lịch nhắc nhở xịt thuốc nhắc lại sau 3-5 ngày để đảm bảo diệt sạch mầm bệnh | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-080** | Là Người dùng, tôi muốn đánh giá mức độ phục hồi của cây sau phác đồ điều trị (Đã khỏi, Đang thuyên giảm, Bệnh nặng hơn) | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-081** | Là Người dùng, tôi muốn tra cứu từ điển bách khoa toàn thư về tất cả các loại sâu bệnh cây trồng đô thị để tự bổ sung kiến thức | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-082** | Là Chuyên gia, tôi muốn đóng góp và cập nhật các mẹo trị bệnh cây dân gian đã được kiểm chứng vào cơ sở dữ liệu cẩm nang | - | CAO | - | CHƯA HOÀN THÀNH |
+| **US-058** | Là Người dùng, tôi muốn xem danh sách các bệnh có triệu chứng tương đồng (Top 3 chẩn đoán khả dĩ) để có cái nhìn tổng quan | @senior-dev | CAO | 5 | **HOÀN THÀNH** |
+| **US-059** | Là Người dùng, tôi muốn trả lời bảng câu hỏi xác thực triệu chứng vật lý (ví dụ: phấn trắng có lau sạch được không, mặt dưới lá có mạng nhện không) | @senior-dev | CAO | 6 | **HOÀN THÀNH** |
+| **US-060** | Là Người dùng, tôi muốn xem hình ảnh mẫu minh họa của từng câu hỏi triệu chứng để dễ dàng so sánh với thực tế cây của mình | @senior-dev | CAO | 4 | **HOÀN THÀNH** |
+| **US-061** | Là Người dùng, tôi muốn hệ thống tự động tái tính toán lại độ tin cậy chẩn đoán sau khi hoàn thành bảng câu hỏi xác thực | @senior-dev | CAO | 6 | **HOÀN THÀNH** |
+| **US-062** | Là Người dùng, tôi muốn phân biệt rõ rệt giữa tổn thương do nấm bệnh và tổn thương do côn trùng chích hút (bọ trĩ, rệp sáp, nhện đỏ) | @senior-dev | CAO | 5 | **HOÀN THÀNH** |
+| **US-063** | Là Người dùng, tôi muốn phân biệt giữa hiện tượng cây thiếu vi chất (thiếu sắt, magie, đạm) và bệnh lý truyền nhiễm để tránh dùng sai thuốc | @senior-dev | CAO | 5 | **HOÀN THÀNH** |
+| **US-064** | Là Người dùng, tôi muốn nhận khuyến cáo mức độ nguy cơ lây lan sang các chậu cây lân cận trong ban công để kịp thời cách ly | @senior-dev | CAO | 4 | **HOÀN THÀNH** |
+| **US-065** | Là Chuyên gia, tôi muốn hiệu chỉnh bộ quy tắc câu hỏi chẩn đoán phân biệt cho từng loài cây trên trang quản trị | @senior-dev | CAO | 4 | **HOÀN THÀNH** |
+| **US-066** | Là Người dùng, tôi muốn tải lại các câu hỏi đã trả lời trước đó để đối chiếu sự thay đổi của vết bệnh sau 1 tuần | @senior-dev | CAO | 4 | **HOÀN THÀNH** |
+| **US-067** | Là Người dùng, tôi muốn bấm một nút micro để hỏi đáp về tình trạng cây bằng giọng nói tiếng Việt khi đang bận tay làm vườn | @senior-dev | CAO | 6 | **HOÀN THÀNH** |
+| **US-068** | Là Người dùng, tôi muốn hệ thống chuyển giọng nói tiếng Việt thành văn bản (Speech-to-Text) chính xác cả các thuật ngữ cây trồng | @senior-dev | CAO | 8 | **HOÀN THÀNH** |
+| **US-069** | Là Người dùng, tôi muốn trợ lý AI trả lời câu hỏi chăm sóc cây bằng văn bản ngắn gọn, súc tích và chuẩn chuyên môn | @senior-dev | CAO | 5 | **HOÀN THÀNH** |
+| **US-070** | Là Người dùng, tôi muốn trợ lý AI tự động đọc to câu trả lời bằng giọng đọc tiếng Việt tự nhiên (Text-to-Speech) để không phải nhìn màn hình | @senior-dev | CAO | 6 | **HOÀN THÀNH** |
+| **US-071** | Là Người dùng, tôi muốn ra lệnh bằng giọng nói để ghi chú nhật ký cây (ví dụ: 'Hôm nay vừa tỉa lá sâu cho hoa hồng') | @senior-dev | CAO | 5 | **HOÀN THÀNH** |
+| **US-072** | Là Người dùng, tôi muốn ra lệnh bằng giọng nói để đánh dấu hoàn thành việc tưới nước mà không cần chạm tay dính đất vào màn hình | @senior-dev | CAO | 5 | **HOÀN THÀNH** |
+| **US-073** | Là Người dùng, tôi muốn xem lại toàn bộ lịch sử các cuộc hội thoại hỏi đáp bằng giọng nói với trợ lý AI | @senior-dev | CAO | 4 | **HOÀN THÀNH** |
+| **US-074** | Là Người dùng, tôi muốn tùy chỉnh tốc độ đọc và giọng đọc (nam/nữ, Bắc/Nam) của trợ lý ảo để phù hợp với sở thích | @senior-dev | CAO | 4 | **HOÀN THÀNH** |
+| **US-075** | Là Người dùng, tôi muốn xem phác đồ điều trị 3 bước chuẩn an toàn: Cách ly -> Xử lý hữu cơ sinh học -> Thuốc đặc trị khi trở nặng | @senior-dev | CAO | 6 | **HOÀN THÀNH** |
+| **US-076** | Là Người dùng, tôi muốn xem hướng dẫn chi tiết cách tự pha chế dung dịch hữu cơ tại nhà (nước tỏi ớt, baking soda, dầu neem) để trị bệnh nhẹ | @senior-dev | CAO | 5 | **HOÀN THÀNH** |
+| **US-077** | Là Người dùng, tôi muốn xem thông tin tên hoạt chất thuốc bảo vệ thực vật sinh học an toàn cho người và thú cưng trong nhà | @senior-dev | CAO | 5 | **HOÀN THÀNH** |
+| **US-078** | Là Người dùng, tôi muốn xem video/hình ảnh minh họa cách cắt tỉa cành lá bị nhiễm nấm đúng kỹ thuật tránh lây lan mầm bệnh | @senior-dev | CAO | 4 | **HOÀN THÀNH** |
+| **US-079** | Là Người dùng, tôi muốn hệ thống tự động tạo lịch nhắc nhở xịt thuốc nhắc lại sau 3-5 ngày để đảm bảo diệt sạch mầm bệnh | @senior-dev | CAO | 5 | **HOÀN THÀNH** |
+| **US-080** | Là Người dùng, tôi muốn đánh giá mức độ phục hồi của cây sau phác đồ điều trị (Đã khỏi, Đang thuyên giảm, Bệnh nặng hơn) | @senior-dev | CAO | 5 | **HOÀN THÀNH** |
+| **US-081** | Là Người dùng, tôi muốn tra cứu từ điển bách khoa toàn thư về tất cả các loại sâu bệnh cây trồng đô thị để tự bổ sung kiến thức | @senior-dev | CAO | 5 | **HOÀN THÀNH** |
+| **US-082** | Là Chuyên gia, tôi muốn đóng góp và cập nhật các mẹo trị bệnh cây dân gian đã được kiểm chứng vào cơ sở dữ liệu cẩm nang | @senior-dev | CAO | 8 | **HOÀN THÀNH** |
 | **US-083** | Là Người dùng, tôi muốn bấm mua ngay loại thuốc sinh học hoặc phân bón tương ứng với bệnh cây vừa quét qua liên kết Shopee/Lazada (Affiliate) | - | CAO | - | CHƯA HOÀN THÀNH |
 | **US-084** | Là Người dùng, tôi muốn xem danh sách các cửa hàng vật tư nông nghiệp đô thị uy tín gần vị trí của tôi nhất để đến mua trực tiếp | - | CAO | - | CHƯA HOÀN THÀNH |
 | **US-085** | Là Người dùng, tôi muốn đăng ký gói thành viên VIP (Urban Plants Pro - 29k/tháng) để sử dụng không giới hạn lượt quét AI và trợ lý giọng nói | - | CAO | - | CHƯA HOÀN THÀNH |

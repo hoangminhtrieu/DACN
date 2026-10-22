@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:urban_plants/core/theme.dart';
 import 'package:urban_plants/features/diagnosis/services/diagnosis_api_service.dart';
+import 'package:urban_plants/features/diagnosis/screens/differential_questions_screen.dart';
 
 class DiagnosisResultScreen extends StatefulWidget {
   final Uint8List originalImageBytes;
@@ -295,6 +296,48 @@ class _DiagnosisResultScreenState extends State<DiagnosisResultScreen> {
               }),
               const SizedBox(height: 16),
             ],
+
+            // US-058 đến US-066: Nút Chẩn đoán phân biệt & Nhận Phác Đồ Safe-First
+            Container(
+              margin: const EdgeInsets.only(bottom: 12),
+              decoration: BoxDecoration(
+                gradient: const LinearGradient(
+                  colors: [Color(0xFF1B5E20), Color(0xFF2E7D32)],
+                ),
+                borderRadius: BorderRadius.circular(14),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.green.withOpacity(0.3),
+                    blurRadius: 8,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
+              ),
+              child: ElevatedButton.icon(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => DifferentialQuestionsScreen(
+                        diseaseCode: primary['disease_code'] ?? 'PM_01',
+                        diseaseName: primary['disease_name_vi'] ?? 'Bệnh Phấn Trắng',
+                        initialConfidence: (primary['confidence'] ?? 0.85).toDouble(),
+                      ),
+                    ),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.transparent,
+                  shadowColor: Colors.transparent,
+                  padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                ),
+                icon: const Icon(Icons.rule_folder_outlined, color: Colors.white, size: 24),
+                label: const Text(
+                  'Kiểm chứng 3 Triệu chứng để Nhận Phác đồ Safe-First',
+                  style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14),
+                ),
+              ),
+            ),
 
             // Action Buttons
             ElevatedButton.icon(

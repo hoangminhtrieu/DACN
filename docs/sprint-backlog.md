@@ -78,3 +78,36 @@
 | **US-055** | Lưu kết quả chẩn đoán vào hồ sơ bệnh án của cây trong 'Vườn của tôi' | `@senior-dev` | 5 | **ĐÃ HOÀN THÀNH** |
 | **US-056** | Chia sẻ kết quả quét bệnh kèm ảnh chụp lên mạng xã hội/cộng đồng | `@senior-dev` | 4 | **ĐÃ HOÀN THÀNH** |
 | **US-057** | Nút 'Phản hồi kết quả chưa đúng' gửi mô tả thực tế về kho Active Learning | `@senior-dev` | 5 | **ĐÃ HOÀN THÀNH** |
+
+---
+
+## Sprint 4 (Ngày 4): Chẩn đoán Phân biệt, Giọng nói & Phác đồ Safe-First (US-058 đến US-082)
+- **Trạng thái**: **ĐÃ HOÀN THÀNH TOÀN BỘ (25/25 Task)**
+
+| ID | Task Description | Phụ trách | Est. (h) | Status |
+| :--- | :--- | :--- | :--- | :--- |
+| **US-058** | Xem danh sách các bệnh có triệu chứng tương đồng (Top 3 chẩn đoán khả dĩ) | `@senior-dev` | 5 | **ĐÃ HOÀN THÀNH** |
+| **US-059** | Trả lời bảng câu hỏi xác thực triệu chứng vật lý (lau phấn trắng, mạng nhện) | `@senior-dev` | 6 | **ĐÃ HOÀN THÀNH** |
+| **US-060** | Xem hình ảnh mẫu minh họa của từng câu hỏi triệu chứng để so sánh thực tế | `@senior-dev` | 4 | **ĐÃ HOÀN THÀNH** |
+| **US-061** | Thuật toán tự động tái tính toán độ tin cậy sau khi hoàn thành bảng câu hỏi | `@senior-dev` | 6 | **ĐÃ HOÀN THÀNH** |
+| **US-062** | Phân biệt rõ rệt giữa tổn thương do nấm bệnh và côn trùng chích hút (nhện đỏ) | `@senior-dev` | 5 | **ĐÃ HOÀN THÀNH** |
+| **US-063** | Phân biệt hiện tượng thiếu vi chất (sắt Fe/Mg) và bệnh lý truyền nhiễm | `@senior-dev` | 5 | **ĐÃ HOÀN THÀNH** |
+| **US-064** | Khuyến cáo mức độ nguy cơ lây lan sang các chậu lân cận trong ban công | `@senior-dev` | 4 | **ĐÃ HOÀN THÀNH** |
+| **US-065** | Bộ quy tắc câu hỏi chẩn đoán phân biệt cho từng loài cây cảnh đô thị | `@senior-dev` | 4 | **ĐÃ HOÀN THÀNH** |
+| **US-066** | Lưu vết câu trả lời để đối chiếu sự thay đổi của vết bệnh sau 1 tuần | `@senior-dev` | 4 | **ĐÃ HOÀN THÀNH** |
+| **US-067** | Nút micro hỏi đáp tình trạng cây bằng giọng nói tiếng Việt rảnh tay | `@senior-dev` | 6 | **ĐÃ HOÀN THÀNH** |
+| **US-068** | Chuyển giọng nói tiếng Việt thành văn bản (Speech-to-Text) 3 miền | `@senior-dev` | 8 | **ĐÃ HOÀN THÀNH** |
+| **US-069** | Trợ lý AI trả lời câu hỏi chăm sóc cây bằng văn bản ngắn gọn, súc tích | `@senior-dev` | 5 | **ĐÃ HOÀN THÀNH** |
+| **US-070** | Tự động đọc to câu trả lời bằng Text-to-Speech tiếng Việt tự nhiên | `@senior-dev` | 6 | **ĐÃ HOÀN THÀNH** |
+| **US-071** | Ra lệnh giọng nói ghi chú nhật ký cây ('Hôm nay vừa tỉa lá sâu cho hoa hồng') | `@senior-dev` | 5 | **ĐÃ HOÀN THÀNH** |
+| **US-072** | Ra lệnh giọng nói đánh dấu hoàn thành tưới nước khi tay dính đất | `@senior-dev` | 5 | **ĐÃ HOÀN THÀNH** |
+| **US-073** | Xem lại toàn bộ lịch sử các cuộc hội thoại hỏi đáp bằng giọng nói | `@senior-dev` | 4 | **ĐÃ HOÀN THÀNH** |
+| **US-074** | Tùy chỉnh tốc độ đọc và giọng đọc (nam/nữ, Bắc/Nam) của trợ lý ảo | `@senior-dev` | 4 | **ĐÃ HOÀN THÀNH** |
+| **US-075** | Hiển thị phác đồ 3 bước Safe-First: Cách ly -> Hữu cơ nhà làm -> Hoạt chất sinh học | `@senior-dev` | 6 | **ĐÃ HOÀN THÀNH** |
+| **US-076** | Hướng dẫn tự pha chế hữu cơ tại nhà (Baking soda, nước tỏi ớt, dầu Neem) | `@senior-dev` | 5 | **ĐÃ HOÀN THÀNH** |
+| **US-077** | Thông tin hoạt chất vi sinh an toàn (*Bacillus subtilis*, *Trichoderma*) | `@senior-dev` | 5 | **ĐÃ HOÀN THÀNH** |
+| **US-078** | Tỷ lệ pha chi tiết (ml/L nước) và khung giờ phun sương mát thích hợp | `@senior-dev` | 4 | **ĐÃ HOÀN THÀNH** |
+| **US-079** | Cảnh báo mức độ an toàn cho trẻ em và chó mèo nuôi trong ban công | `@senior-dev` | 4 | **ĐÃ HOÀN THÀNH** |
+| **US-080** | Tự động tạo lịch nhắc nhở xịt thuốc đợt 2 sau 3 ngày | `@senior-dev` | 5 | **ĐÃ HOÀN THÀNH** |
+| **US-081** | Đánh giá mức độ phục hồi của vết bệnh sau 7 ngày điều trị | `@senior-dev` | 5 | **ĐÃ HOÀN THÀNH** |
+| **US-082** | Từ điển bách khoa toàn thư 30+ loại sâu bệnh và mẹo chữa dân gian | `@senior-dev` | 8 | **ĐÃ HOÀN THÀNH** |
