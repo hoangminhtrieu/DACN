@@ -3,8 +3,6 @@ import 'package:urban_plants/core/theme.dart';
 import 'package:urban_plants/features/auth/services/auth_api_service.dart';
 import 'package:urban_plants/features/auth/screens/register_screen.dart';
 import 'package:urban_plants/features/auth/screens/forgot_password_screen.dart';
-import 'package:urban_plants/features/profile/screens/profile_screen.dart';
-
 import 'package:urban_plants/features/home/screens/home_dashboard_screen.dart';
 
 class LoginScreen extends StatefulWidget {

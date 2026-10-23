@@ -120,24 +120,54 @@ class _MyGardenScreenState extends State<MyGardenScreen> {
                     ],
                   ),
                 )
-              : ListView.separated(
-                  padding: const EdgeInsets.all(16),
-                  itemCount: _plants.length,
-                  separatorBuilder: (_, __) => const SizedBox(height: 12),
-                  itemBuilder: (ctx, i) {
-                    final plant = _plants[i];
-                    return Card(
-                      child: ListTile(
-                        contentPadding: const EdgeInsets.all(12),
-                        leading: CircleAvatar(
-                          radius: 28,
-                          backgroundColor: AppTheme.mintSurface,
-                          child: const Icon(Icons.eco, color: AppTheme.primaryGreen, size: 30),
+              : Column(
+                  children: [
+                    if (_gardens.isNotEmpty)
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                        child: Row(
+                          children: [
+                            FilterChip(
+                              label: const Text('Tất cả'),
+                              selected: _selectedGardenFilter == null,
+                              onSelected: (_) => setState(() => _selectedGardenFilter = null),
+                            ),
+                            ..._gardens.map((g) => Padding(
+                              padding: const EdgeInsets.only(left: 8),
+                              child: FilterChip(
+                                label: Text(g['name'] ?? 'Vườn'),
+                                selected: _selectedGardenFilter == g['id']?.toString(),
+                                onSelected: (val) => setState(() => _selectedGardenFilter = val ? g['id']?.toString() : null),
+                              ),
+                            )),
+                          ],
                         ),
-                        title: Text(
-                          plant['custom_name'],
-                          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-                        ),
+                      ),
+                    Expanded(
+                      child: ListView.separated(
+                        padding: const EdgeInsets.all(16),
+                        itemCount: _selectedGardenFilter == null 
+                            ? _plants.length 
+                            : _plants.where((p) => p['garden_id']?.toString() == _selectedGardenFilter).length,
+                        separatorBuilder: (_, __) => const SizedBox(height: 12),
+                        itemBuilder: (ctx, i) {
+                          final filteredList = _selectedGardenFilter == null
+                              ? _plants
+                              : _plants.where((p) => p['garden_id']?.toString() == _selectedGardenFilter).toList();
+                          final plant = filteredList[i];
+                          return Card(
+                            child: ListTile(
+                              contentPadding: const EdgeInsets.all(12),
+                              leading: const CircleAvatar(
+                                radius: 28,
+                                backgroundColor: AppTheme.mintSurface,
+                                child: Icon(Icons.eco, color: AppTheme.primaryGreen, size: 30),
+                              ),
+                              title: Text(
+                                plant['custom_name'],
+                                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                              ),
                         subtitle: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -159,6 +189,9 @@ class _MyGardenScreenState extends State<MyGardenScreen> {
                     );
                   },
                 ),
+              ),
+            ],
+          ),
     );
   }
 }
