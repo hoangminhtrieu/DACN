@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class DiseaseEncyclopediaScreen extends StatefulWidget {
-  const DiseaseEncyclopediaScreen({Key? key}) : super(key: key);
+  const DiseaseEncyclopediaScreen({super.key});
 
   @override
   State<DiseaseEncyclopediaScreen> createState() => _DiseaseEncyclopediaScreenState();

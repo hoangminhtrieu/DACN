@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 
 class VietnameseVoiceService {
   static const String baseUrl = 'http://localhost:8000/api/v1';
@@ -31,7 +32,7 @@ class VietnameseVoiceService {
   void speak(String text, {Function? onDone}) {
     if (!isVoiceEnabled) return;
     // Tích hợp flutter_tts hoặc gọi Web Speech Synthesis API
-    print('[Vietnamese TTS (${speechRate}x)]: $text');
+    debugPrint('[Vietnamese TTS (${speechRate}x)]: $text');
     if (onDone != null) onDone();
   }
 }

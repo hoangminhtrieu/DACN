@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AffiliateStoreScreen extends StatefulWidget {
-  const AffiliateStoreScreen({Key? key}) : super(key: key);
+  const AffiliateStoreScreen({super.key});
 
   @override
   State<AffiliateStoreScreen> createState() => _AffiliateStoreScreenState();
@@ -148,7 +148,7 @@ class _AffiliateStoreScreenState extends State<AffiliateStoreScreen> with Single
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                       decoration: BoxDecoration(
-                        color: (p['color'] as Color).withOpacity(0.1),
+                        color: (p['color'] as Color).withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Text(
@@ -219,10 +219,10 @@ class _AffiliateStoreScreenState extends State<AffiliateStoreScreen> with Single
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CircleAvatar(
-                  backgroundColor: const Color(0xFFE8F5E9),
+                const CircleAvatar(
+                  backgroundColor: Color(0xFFE8F5E9),
                   radius: 24,
-                  child: const Icon(Icons.store, color: Color(0xFF1B5E20)),
+                  child: Icon(Icons.store, color: Color(0xFF1B5E20)),
                 ),
                 const SizedBox(width: 12),
                 Expanded(

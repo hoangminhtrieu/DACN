@@ -141,13 +141,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
           IconButton(
             icon: const Icon(Icons.logout_rounded),
             onPressed: () async {
+              final nav = Navigator.of(context);
               await _authService.clearAuth();
-              if (mounted) {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (_) => const LoginScreen()),
-                );
-              }
+              if (!mounted) return;
+              nav.pushReplacement(
+                MaterialPageRoute(builder: (_) => const LoginScreen()),
+              );
             },
           )
         ],
@@ -160,10 +159,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
             Center(
               child: Column(
                 children: [
-                  CircleAvatar(
+                  const CircleAvatar(
                     radius: 46,
                     backgroundColor: AppTheme.mintSurface,
-                    child: const Icon(Icons.person, size: 54, color: AppTheme.primaryGreen),
+                    child: Icon(Icons.person, size: 54, color: AppTheme.primaryGreen),
                   ),
                   const SizedBox(height: 12),
                   Text(
@@ -179,7 +178,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                     decoration: BoxDecoration(
-                      color: isAdmin ? AppTheme.warningAmber.withOpacity(0.2) : AppTheme.mintSurface,
+                      color: isAdmin ? AppTheme.warningAmber.withValues(alpha: 0.2) : AppTheme.mintSurface,
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Text(
@@ -213,7 +212,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     title: const Text('Xác thực Sinh trắc học'),
                     subtitle: const Text('Mở khóa nhanh bằng Vân tay hoặc FaceID'),
                     value: _biometricEnabled,
-                    activeColor: AppTheme.primaryGreen,
+                    activeThumbColor: AppTheme.primaryGreen,
                     onChanged: (val) {
                       setState(() => _biometricEnabled = val);
                       ScaffoldMessenger.of(context).showSnackBar(

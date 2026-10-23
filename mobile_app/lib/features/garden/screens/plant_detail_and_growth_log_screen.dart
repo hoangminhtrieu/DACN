@@ -104,8 +104,8 @@ class _PlantDetailAndGrowthLogScreenState extends State<PlantDetailAndGrowthLogS
       showDialog(
         context: context,
         builder: (ctx) => AlertDialog(
-          title: Row(
-            children: const [
+          title: const Row(
+            children: [
               Icon(Icons.picture_as_pdf, color: AppTheme.primaryGreen),
               SizedBox(width: 8),
               Expanded(child: Text('Báo Cáo Sức Khỏe Cây', style: TextStyle(fontSize: 18))),
@@ -170,10 +170,10 @@ class _PlantDetailAndGrowthLogScreenState extends State<PlantDetailAndGrowthLogS
             color: Colors.white,
             child: Row(
               children: [
-                CircleAvatar(
+                const CircleAvatar(
                   radius: 36,
                   backgroundColor: AppTheme.mintSurface,
-                  child: const Icon(Icons.local_florist, size: 40, color: AppTheme.primaryGreen),
+                  child: Icon(Icons.local_florist, size: 40, color: AppTheme.primaryGreen),
                 ),
                 const SizedBox(width: 16),
                 Expanded(
@@ -226,7 +226,7 @@ class _PlantDetailAndGrowthLogScreenState extends State<PlantDetailAndGrowthLogS
                                 children: [
                                   const Icon(Icons.circle, size: 14, color: AppTheme.primaryGreen),
                                   if (i < _logs.length - 1)
-                                    Container(width: 2, height: 60, color: AppTheme.primaryGreen.withOpacity(0.3)),
+                                    Container(width: 2, height: 60, color: AppTheme.primaryGreen.withValues(alpha: 0.3)),
                                 ],
                               ),
                               const SizedBox(width: 12),

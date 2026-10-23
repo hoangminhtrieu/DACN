@@ -60,7 +60,9 @@ class _SmartScheduleAndWeatherScreenState extends State<SmartScheduleAndWeatherS
         );
       }
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Lỗi: $e')));
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Lỗi: $e')));
+      }
     }
   }
 
@@ -153,7 +155,7 @@ class _SmartScheduleAndWeatherScreenState extends State<SmartScheduleAndWeatherS
                       title: const Text('Chế độ Đi Vắng / Nghỉ Dưỡng', style: TextStyle(fontWeight: FontWeight.bold)),
                       subtitle: const Text('Tự động tạm dừng chuông nhắc nhở khi bạn vắng nhà'),
                       value: _isVacation,
-                      activeColor: AppTheme.primaryGreen,
+                      activeThumbColor: AppTheme.primaryGreen,
                       onChanged: _toggleVacation,
                     ),
                   ),

@@ -182,7 +182,7 @@ class _DiagnosisResultScreenState extends State<DiagnosisResultScreen> {
                         child: Container(
                           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                           decoration: BoxDecoration(
-                            color: Colors.black.withOpacity(0.65),
+                            color: Colors.black.withValues(alpha: 0.65),
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Text(
@@ -198,9 +198,9 @@ class _DiagnosisResultScreenState extends State<DiagnosisResultScreen> {
                     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                     child: Column(
                       children: [
-                        Row(
+                        const Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: const [
+                          children: [
                             Text('Ảnh Gốc', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: AppTheme.neutralMuted)),
                             Text('Thanh trượt so sánh vùng nhiệt Grad-CAM', style: TextStyle(fontSize: 12, color: AppTheme.primaryGreen, fontWeight: FontWeight.w600)),
                             Text('Grad-CAM 100%', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: AppTheme.neutralMuted)),
@@ -240,7 +240,7 @@ class _DiagnosisResultScreenState extends State<DiagnosisResultScreen> {
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                           decoration: BoxDecoration(
-                            color: _getSeverityColor(severity).withOpacity(0.15),
+                            color: _getSeverityColor(severity).withValues(alpha: 0.15),
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Text(
@@ -307,7 +307,7 @@ class _DiagnosisResultScreenState extends State<DiagnosisResultScreen> {
                 borderRadius: BorderRadius.circular(14),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.green.withOpacity(0.3),
+                    color: Colors.green.withValues(alpha: 0.3),
                     blurRadius: 8,
                     offset: const Offset(0, 4),
                   ),

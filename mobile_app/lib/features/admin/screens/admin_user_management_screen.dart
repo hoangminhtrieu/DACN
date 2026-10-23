@@ -162,7 +162,7 @@ class _AdminUserManagementScreenState extends State<AdminUserManagementScreen> {
                     child: Row(
                       children: [
                         Icon(isActive ? Icons.lock : Icons.lock_open, size: 20),
-                        SizedBox(width: 8),
+                        const SizedBox(width: 8),
                         Text(isActive ? 'Khóa tài khoản' : 'Mở khóa'),
                       ],
                     ),

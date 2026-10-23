@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class VipSubscriptionScreen extends StatefulWidget {
-  const VipSubscriptionScreen({Key? key}) : super(key: key);
+  const VipSubscriptionScreen({super.key});
 
   @override
   State<VipSubscriptionScreen> createState() => _VipSubscriptionScreenState();
@@ -61,7 +61,7 @@ class _VipSubscriptionScreenState extends State<VipSubscriptionScreen> {
               borderRadius: BorderRadius.circular(16),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.green.withOpacity(0.3),
+                  color: Colors.green.withValues(alpha: 0.3),
                   blurRadius: 10,
                   offset: const Offset(0, 4),
                 ),
@@ -182,7 +182,7 @@ class _VipSubscriptionScreenState extends State<VipSubscriptionScreen> {
             width: isSelected ? 2 : 1,
           ),
           boxShadow: isSelected
-              ? [BoxShadow(color: Colors.green.withOpacity(0.15), blurRadius: 8, offset: const Offset(0, 2))]
+              ? [BoxShadow(color: Colors.green.withValues(alpha: 0.15), blurRadius: 8, offset: const Offset(0, 2))]
               : null,
         ),
         child: Column(
@@ -217,11 +217,9 @@ class _VipSubscriptionScreenState extends State<VipSubscriptionScreen> {
         onTap: () => setState(() => _selectedPayment = id),
         leading: Icon(icon, color: color),
         title: Text(label, style: const TextStyle(fontSize: 13.5, fontWeight: FontWeight.w600)),
-        trailing: Radio<String>(
-          value: id,
-          groupValue: _selectedPayment,
-          activeColor: const Color(0xFF2E7D32),
-          onChanged: (val) => setState(() => _selectedPayment = val!),
+        trailing: Icon(
+          isSelected ? Icons.radio_button_checked : Icons.radio_button_off,
+          color: isSelected ? const Color(0xFF2E7D32) : const Color(0xFF94A3B8),
         ),
       ),
     );

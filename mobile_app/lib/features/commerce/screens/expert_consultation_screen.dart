@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ExpertConsultationScreen extends StatefulWidget {
-  const ExpertConsultationScreen({Key? key}) : super(key: key);
+  const ExpertConsultationScreen({super.key});
 
   @override
   State<ExpertConsultationScreen> createState() => _ExpertConsultationScreenState();

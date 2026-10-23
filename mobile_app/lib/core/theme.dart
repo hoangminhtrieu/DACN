@@ -20,7 +20,6 @@ class AppTheme {
         seedColor: primaryGreen,
         primary: primaryGreen,
         secondary: secondaryGreen,
-        background: backgroundApp,
         surface: Colors.white,
       ),
       appBarTheme: const AppBarTheme(

@@ -110,14 +110,14 @@ class _AICameraScannerScreenState extends State<AICameraScannerScreen> {
                         left: 12,
                         child: Text(
                           '🌿 Căn giữa lá có đốm bệnh',
-                          style: TextStyle(color: Colors.white.withOpacity(0.85), fontSize: 13, fontWeight: FontWeight.bold),
+                          style: TextStyle(color: Colors.white.withValues(alpha: 0.85), fontSize: 13, fontWeight: FontWeight.bold),
                         ),
                       ),
                       Center(
                         child: Icon(
                           Icons.center_focus_strong,
                           size: 72,
-                          color: Colors.white.withOpacity(0.35),
+                          color: Colors.white.withValues(alpha: 0.35),
                         ),
                       ),
                     ],
@@ -136,7 +136,7 @@ class _AICameraScannerScreenState extends State<AICameraScannerScreen> {
                     margin: const EdgeInsets.symmetric(horizontal: 24),
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
-                      color: Colors.red.shade900.withOpacity(0.85),
+                      color: Colors.red.shade900.withValues(alpha: 0.85),
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(color: Colors.redAccent),
                     ),
@@ -161,7 +161,7 @@ class _AICameraScannerScreenState extends State<AICameraScannerScreen> {
           // Loading Overlay
           if (_isProcessing)
             Container(
-              color: Colors.black.withOpacity(0.7),
+              color: Colors.black.withValues(alpha: 0.7),
               child: const Center(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
