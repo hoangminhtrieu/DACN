@@ -111,3 +111,29 @@
 | **US-080** | Tự động tạo lịch nhắc nhở xịt thuốc đợt 2 sau 3 ngày | `@senior-dev` | 5 | **ĐÃ HOÀN THÀNH** |
 | **US-081** | Đánh giá mức độ phục hồi của vết bệnh sau 7 ngày điều trị | `@senior-dev` | 5 | **ĐÃ HOÀN THÀNH** |
 | **US-082** | Từ điển bách khoa toàn thư 30+ loại sâu bệnh và mẹo chữa dân gian | `@senior-dev` | 8 | **ĐÃ HOÀN THÀNH** |
+
+---
+
+## Sprint 5 (Ngày 5): Thương Mại, Admin CMS & Đóng Gói Ứng Dụng (US-083 đến US-100)
+- **Trạng thái**: **ĐÃ HOÀN THÀNH TOÀN BỘ (18/18 Task) — HOÀN TẤT 100% PRODUCT BACKLOG**
+
+| ID | Task Description | Phụ trách | Est. (h) | Status |
+| :--- | :--- | :--- | :--- | :--- |
+| **US-083** | Mua thuốc sinh học/phân bón qua liên kết Shopee/Lazada Affiliate | `@senior-dev` | 5 | **ĐÃ HOÀN THÀNH** |
+| **US-084** | Danh sách cửa hàng vật tư nông nghiệp đô thị uy tín gần vị trí nhất (GPS) | `@senior-dev` | 6 | **ĐÃ HOÀN THÀNH** |
+| **US-085** | Đăng ký gói VIP Urban Plants Pro (29k/tháng) không giới hạn AI scan | `@senior-dev` | 6 | **ĐÃ HOÀN THÀNH** |
+| **US-086** | Cổng thanh toán VietQR động, ví điện tử MoMo hoặc ZaloPay | `@senior-dev` | 8 | **ĐÃ HOÀN THÀNH** |
+| **US-087** | Đặt lịch tư vấn 1-1 qua Video Call với Chuyên gia cây trồng | `@senior-dev` | 6 | **ĐÃ HOÀN THÀNH** |
+| **US-088** | Thanh toán phí tư vấn chuyên gia trực tiếp trên app (99k/buổi) | `@senior-dev` | 5 | **ĐÃ HOÀN THÀNH** |
+| **US-089** | Chuyên gia thiết lập khung giờ rảnh và biểu phí tư vấn | `@senior-dev` | 5 | **ĐÃ HOÀN THÀNH** |
+| **US-090** | Đăng ký gian hàng bán vật tư sinh học, chậu, đất sạch | `@senior-dev` | 5 | **ĐÃ HOÀN THÀNH** |
+| **US-091** | Tự động tính toán hoa hồng từ đơn hàng Affiliate (8-12%) | `@senior-dev` | 4 | **ĐÃ HOÀN THÀNH** |
+| **US-092** | Xem lịch sử giao dịch và hóa đơn điện tử e-receipt | `@senior-dev` | 4 | **ĐÃ HOÀN THÀNH** |
+| **US-093** | Bảng điều khiển Admin Dashboard DAU/MAU, lượt quét AI và doanh thu | `@senior-dev` | 6 | **ĐÃ HOÀN THÀNH** |
+| **US-094** | Bản đồ nhiệt phân bố dịch bệnh cây trồng theo từng quận/khu vực | `@senior-dev` | 6 | **ĐÃ HOÀN THÀNH** |
+| **US-095** | CMS quản lý danh mục cây trồng, thư viện sâu bệnh và cẩm nang | `@senior-dev` | 5 | **ĐÃ HOÀN THÀNH** |
+| **US-096** | Tải lên phiên bản mô hình AI TFLite mới cập nhật ngầm qua OTA | `@senior-dev` | 6 | **ĐÃ HOÀN THÀNH** |
+| **US-097** | Kiểm duyệt và giải quyết các khiếu nại tư vấn chuyên gia | `@senior-dev` | 4 | **ĐÃ HOÀN THÀNH** |
+| **US-098** | Xuất dữ liệu thống kê dịch bệnh và doanh thu ra tệp Excel/CSV | `@senior-dev` | 4 | **ĐÃ HOÀN THÀNH** |
+| **US-099** | Tối ưu dung lượng gói cài đặt dưới 35MB & 60 FPS trên máy Android yếu | `@senior-dev` / `@qa-tester` | 8 | **ĐÃ HOÀN THÀNH** |
+| **US-100** | Cấu hình Google Play Developer, ảnh chụp màn hình, chính sách bảo mật | `@senior-dev` / `@qa-tester` | 8 | **ĐÃ HOÀN THÀNH** |

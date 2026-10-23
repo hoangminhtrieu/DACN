@@ -86,21 +86,21 @@
 | **US-080** | Là Người dùng, tôi muốn đánh giá mức độ phục hồi của cây sau phác đồ điều trị (Đã khỏi, Đang thuyên giảm, Bệnh nặng hơn) | @senior-dev | CAO | 5 | **HOÀN THÀNH** |
 | **US-081** | Là Người dùng, tôi muốn tra cứu từ điển bách khoa toàn thư về tất cả các loại sâu bệnh cây trồng đô thị để tự bổ sung kiến thức | @senior-dev | CAO | 5 | **HOÀN THÀNH** |
 | **US-082** | Là Chuyên gia, tôi muốn đóng góp và cập nhật các mẹo trị bệnh cây dân gian đã được kiểm chứng vào cơ sở dữ liệu cẩm nang | @senior-dev | CAO | 8 | **HOÀN THÀNH** |
-| **US-083** | Là Người dùng, tôi muốn bấm mua ngay loại thuốc sinh học hoặc phân bón tương ứng với bệnh cây vừa quét qua liên kết Shopee/Lazada (Affiliate) | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-084** | Là Người dùng, tôi muốn xem danh sách các cửa hàng vật tư nông nghiệp đô thị uy tín gần vị trí của tôi nhất để đến mua trực tiếp | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-085** | Là Người dùng, tôi muốn đăng ký gói thành viên VIP (Urban Plants Pro - 29k/tháng) để sử dụng không giới hạn lượt quét AI và trợ lý giọng nói | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-086** | Là Người dùng, tôi muốn thanh toán gói VIP dễ dàng thông qua mã VietQR động, ví điện tử MoMo hoặc ZaloPay | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-087** | Là Người dùng, tôi muốn đặt lịch tư vấn 1-1 qua video call với Chuyên gia cây trồng khi gặp ca bệnh lạ khó chữa | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-088** | Là Người dùng, tôi muốn thanh toán phí tư vấn chuyên gia trực tiếp trên ứng dụng trước buổi hẹn | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-089** | Là Chuyên gia, tôi muốn thiết lập khung giờ rảnh và biểu phí tư vấn của mình trên hệ thống để người dùng đăng ký | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-090** | Là Chủ cửa hàng vật tư, tôi muốn đăng ký gian hàng bán vật tư sinh học, chậu cây, đất sạch trên nền tảng Urban Plants | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-091** | Là Hệ thống, tôi muốn tự động tính toán hoa hồng từ đơn hàng Affiliate và phí kết nối chuyên gia để ghi nhận doanh thu | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-092** | Là Người dùng, tôi muốn xem lại lịch sử giao dịch và hóa đơn điện tử cho các gói dịch vụ đã mua trên ứng dụng | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-093** | Là Admin, tôi muốn xem bảng điều khiển tổng quan (Dashboard) hiển thị số lượng người dùng hoạt động (DAU/MAU), lượt quét bệnh và doanh thu hàng ngày | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-094** | Là Admin, tôi muốn xem bản đồ nhiệt phân bố các loại dịch bệnh cây trồng theo từng quận/khu vực đô thị để nắm bắt xu hướng lây lan | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-095** | Là Admin, tôi muốn quản lý danh mục cây trồng, thư viện sâu bệnh và các bài viết cẩm nang hướng dẫn điều trị trên CMS | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-096** | Là Admin, tôi muốn tải lên phiên bản mô hình AI TFLite mới lên máy chủ để ứng dụng tự động tải về cập nhật ngầm (OTA Model Update) | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-097** | Là Admin, tôi muốn kiểm duyệt và giải quyết các khiếu nại của người dùng về chất lượng tư vấn của Chuyên gia | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-098** | Là Admin, tôi muốn xuất dữ liệu báo cáo thống kê lượt quét và doanh thu ra tệp Excel phục vụ báo cáo định kỳ | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-099** | Là Lập trình viên, tôi muốn tối ưu dung lượng gói cài đặt ứng dụng (dưới 35MB) và kiểm thử độ mượt mà trên nhiều dòng máy Android cấu hình thấp | - | CAO | - | CHƯA HOÀN THÀNH |
-| **US-100** | Là Lập trình viên, tôi muốn cấu hình tài khoản Google Play Developer, chuẩn bị ảnh chụp màn hình, chính sách bảo mật và đưa ứng dụng lên Google Play Store | - | CAO | - | CHƯA HOÀN THÀNH |
+| **US-083** | Là Người dùng, tôi muốn bấm mua ngay loại thuốc sinh học hoặc phân bón tương ứng với bệnh cây vừa quét qua liên kết Shopee/Lazada (Affiliate) | @senior-dev | CAO | 5 | **HOÀN THÀNH** |
+| **US-084** | Là Người dùng, tôi muốn xem danh sách các cửa hàng vật tư nông nghiệp đô thị uy tín gần vị trí của tôi nhất để đến mua trực tiếp | @senior-dev | CAO | 6 | **HOÀN THÀNH** |
+| **US-085** | Là Người dùng, tôi muốn đăng ký gói thành viên VIP (Urban Plants Pro - 29k/tháng) để sử dụng không giới hạn lượt quét AI và trợ lý giọng nói | @senior-dev | CAO | 6 | **HOÀN THÀNH** |
+| **US-086** | Là Người dùng, tôi muốn thanh toán gói VIP dễ dàng thông qua mã VietQR động, ví điện tử MoMo hoặc ZaloPay | @senior-dev | CAO | 8 | **HOÀN THÀNH** |
+| **US-087** | Là Người dùng, tôi muốn đặt lịch tư vấn 1-1 qua video call với Chuyên gia cây trồng khi gặp ca bệnh lạ khó chữa | @senior-dev | CAO | 6 | **HOÀN THÀNH** |
+| **US-088** | Là Người dùng, tôi muốn thanh toán phí tư vấn chuyên gia trực tiếp trên ứng dụng trước buổi hẹn | @senior-dev | CAO | 5 | **HOÀN THÀNH** |
+| **US-089** | Là Chuyên gia, tôi muốn thiết lập khung giờ rảnh và biểu phí tư vấn của mình trên hệ thống để người dùng đăng ký | @senior-dev | CAO | 5 | **HOÀN THÀNH** |
+| **US-090** | Là Chủ cửa hàng vật tư, tôi muốn đăng ký gian hàng bán vật tư sinh học, chậu cây, đất sạch trên nền tảng Urban Plants | @senior-dev | CAO | 5 | **HOÀN THÀNH** |
+| **US-091** | Là Hệ thống, tôi muốn tự động tính toán hoa hồng từ đơn hàng Affiliate và phí kết nối chuyên gia để ghi nhận doanh thu | @senior-dev | CAO | 4 | **HOÀN THÀNH** |
+| **US-092** | Là Người dùng, tôi muốn xem lại lịch sử giao dịch và hóa đơn điện tử cho các gói dịch vụ đã mua trên ứng dụng | @senior-dev | CAO | 4 | **HOÀN THÀNH** |
+| **US-093** | Là Admin, tôi muốn xem bảng điều khiển tổng quan (Dashboard) hiển thị số lượng người dùng hoạt động (DAU/MAU), lượt quét bệnh và doanh thu hàng ngày | @senior-dev | CAO | 6 | **HOÀN THÀNH** |
+| **US-094** | Là Admin, tôi muốn xem bản đồ nhiệt phân bố các loại dịch bệnh cây trồng theo từng quận/khu vực đô thị để nắm bắt xu hướng lây lan | @senior-dev | CAO | 6 | **HOÀN THÀNH** |
+| **US-095** | Là Admin, tôi muốn quản lý danh mục cây trồng, thư viện sâu bệnh và các bài viết cẩm nang hướng dẫn điều trị trên CMS | @senior-dev | CAO | 5 | **HOÀN THÀNH** |
+| **US-096** | Là Admin, tôi muốn tải lên phiên bản mô hình AI TFLite mới lên máy chủ để ứng dụng tự động tải về cập nhật ngầm (OTA Model Update) | @senior-dev | CAO | 6 | **HOÀN THÀNH** |
+| **US-097** | Là Admin, tôi muốn kiểm duyệt và giải quyết các khiếu nại của người dùng về chất lượng tư vấn của Chuyên gia | @senior-dev | CAO | 4 | **HOÀN THÀNH** |
+| **US-098** | Là Admin, tôi muốn xuất dữ liệu báo cáo thống kê lượt quét và doanh thu ra tệp Excel phục vụ báo cáo định kỳ | @senior-dev | CAO | 4 | **HOÀN THÀNH** |
+| **US-099** | Là Lập trình viên, tôi muốn tối ưu dung lượng gói cài đặt ứng dụng (dưới 35MB) và kiểm thử độ mượt mà trên nhiều dòng máy Android cấu hình thấp | @senior-dev | CAO | 8 | **HOÀN THÀNH** |
+| **US-100** | Là Lập trình viên, tôi muốn cấu hình tài khoản Google Play Developer, chuẩn bị ảnh chụp màn hình, chính sách bảo mật và đưa ứng dụng lên Google Play Store | @senior-dev | CAO | 8 | **HOÀN THÀNH** |

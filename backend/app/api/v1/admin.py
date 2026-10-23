@@ -1,41 +1,49 @@
-from typing import List
-from fastapi import APIRouter, Depends, status
-from app.api.deps import require_admin, get_admin_service
-from app.models.user import User
-from app.services.admin_service import AdminService
-from app.schemas.user import UserResponse, RoleUpdateRequest, UserStatusUpdateRequest
+from typing import Optional
+from fastapi import APIRouter, Response
+from pydantic import BaseModel
+from app.services.admin_cms_service import admin_cms_service
 
-router = APIRouter(prefix="/admin", tags=["Admin Management & Governance"])
+router = APIRouter(prefix="/admin", tags=["Admin Dashboard, Disease Heatmap & CMS"])
 
-@router.get("/users", response_model=List[UserResponse])
-async def list_users(
-    skip: int = 0,
-    limit: int = 50,
-    admin_user: User = Depends(require_admin),
-    admin_service: AdminService = Depends(get_admin_service)
-):
-    """Lấy danh sách tất cả người dùng trong hệ thống"""
-    users = await admin_service.get_all_users(skip=skip, limit=limit)
-    return [UserResponse.model_validate(u) for u in users]
+class PublishModelRequest(BaseModel):
+    version: str
+    file_size_mb: float
+    checksum_sha256: str
+    download_url: str
+    changelog: str
 
-@router.put("/users/{user_id}/role", response_model=UserResponse)
-async def update_user_role(
-    user_id: str,
-    req: RoleUpdateRequest,
-    admin_user: User = Depends(require_admin),
-    admin_service: AdminService = Depends(get_admin_service)
-):
-    """US-014: Phân quyền người dùng (USER, VIP, EXPERT, ADMIN)"""
-    updated_user = await admin_service.update_user_role(admin_user, user_id, req)
-    return UserResponse.model_validate(updated_user)
+@router.get("/dashboard/overview")
+def get_dashboard_overview():
+    """US-093: Bảng điều khiển tổng quan DAU/MAU, lượt quét AI và doanh thu"""
+    return admin_cms_service.get_dashboard_overview()
 
-@router.put("/users/{user_id}/status", response_model=UserResponse)
-async def update_user_status(
-    user_id: str,
-    req: UserStatusUpdateRequest,
-    admin_user: User = Depends(require_admin),
-    admin_service: AdminService = Depends(get_admin_service)
-):
-    """US-015: Khóa hoặc kích hoạt tài khoản khi vi phạm tiêu chuẩn cộng đồng"""
-    updated_user = await admin_service.update_user_status(admin_user, user_id, req)
-    return UserResponse.model_validate(updated_user)
+@router.get("/disease-heatmap")
+def get_disease_heatmap(city: Optional[str] = None):
+    """US-094: Bản đồ nhiệt phân bố dịch bệnh cây cảnh theo từng quận/khu vực"""
+    return admin_cms_service.get_disease_heatmap(city)
+
+@router.get("/ota-model/latest")
+def get_latest_ota_model():
+    """US-096: Kiểm tra phiên bản mô hình AI TFLite mới nhất để app cập nhật ngầm"""
+    return admin_cms_service.get_latest_ota_model()
+
+@router.post("/ota-model/publish")
+def publish_new_ota_model(req: PublishModelRequest):
+    """US-096: Admin xuất bản phiên bản TFLite mới lên hệ thống OTA"""
+    return admin_cms_service.publish_new_ota_model(
+        version=req.version,
+        file_size_mb=req.file_size_mb,
+        checksum=req.checksum_sha256,
+        download_url=req.download_url,
+        changelog=req.changelog
+    )
+
+@router.get("/reports/export-csv")
+def export_analytics_csv():
+    """US-098: Xuất báo cáo thống kê dịch bệnh và doanh thu ra tệp CSV/Excel"""
+    csv_data = admin_cms_service.export_analytics_csv()
+    return Response(
+        content=csv_data,
+        media_type="text/csv",
+        headers={"Content-Disposition": "attachment; filename=urban_plants_disease_report.csv"}
+    )
