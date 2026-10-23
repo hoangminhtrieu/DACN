@@ -260,55 +260,7 @@
             </div>
 
             <div id="watering-task-container">
-              <!-- Cây 1 -->
-              <div class="watering-item" id="task-plant-1">
-                <div class="watering-top-row">
-                  <img src="https://images.unsplash.com/photo-1559563458-527698bf5295?auto=format&fit=crop&w=300&q=80" class="plant-thumb" alt="Mon Coeur">
-                  <div class="watering-meta">
-                    <div class="plant-name">Hoa Hồng Mon Coeur</div>
-                    <div class="location-pill">Ban công Đông • Cần tưới 450ml</div>
-                  </div>
-                </div>
-                <div class="moisture-wrap">
-                  <span id="moisture-text-1">Độ ẩm đất: 22%</span>
-                  <div class="moisture-bar-bg">
-                    <div class="moisture-fill low" id="moisture-bar-1" style="width: 22%;"></div>
-                  </div>
-                  <span style="font-weight: 700; color: #EF4444;" id="moisture-status-1">Rất khô</span>
-                </div>
-                <div class="watering-actions">
-                  <button class="btn-act btn-act-water" id="btn-water-1" onclick="handleWaterAction(1)">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
-                    Đã tưới nước
-                  </button>
-                  <button class="btn-act btn-act-postpone" id="btn-postpone-1" onclick="handlePostponeAction(1)">Hoãn 1 ngày</button>
-                </div>
-              </div>
-
-              <!-- Cây 2 -->
-              <div class="watering-item" id="task-plant-2">
-                <div class="watering-top-row">
-                  <img src="https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&fit=crop&w=300&q=80" class="plant-thumb" alt="Monstera">
-                  <div class="watering-meta">
-                    <div class="plant-name">Monstera Lá Xẻ</div>
-                    <div class="location-pill">Phòng khách • Cần tưới 300ml</div>
-                  </div>
-                </div>
-                <div class="moisture-wrap">
-                  <span id="moisture-text-2">Độ ẩm đất: 32%</span>
-                  <div class="moisture-bar-bg">
-                    <div class="moisture-fill low" id="moisture-bar-2" style="width: 32%;"></div>
-                  </div>
-                  <span style="font-weight: 700; color: #F59E0B;" id="moisture-status-2">Đang thiếu</span>
-                </div>
-                <div class="watering-actions">
-                  <button class="btn-act btn-act-water" id="btn-water-2" onclick="handleWaterAction(2)">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
-                    Đã tưới nước
-                  </button>
-                  <button class="btn-act btn-act-postpone" id="btn-postpone-2" onclick="handlePostponeAction(2)">Hoãn 1 ngày</button>
-                </div>
-              </div>
+              <!-- Render động 100% từ userPlants qua hàm renderWateringTasks() -->
             </div>
 
             <!-- VƯỜN CỦA TÔI (GRID 2 CỘT 100% ẢNH THỰC TẾ) -->
@@ -587,6 +539,19 @@
               Cài Đặt, VIP & Quản Trị
             </div>
 
+            <!-- Thẻ Hồ Sơ Người Làm Vườn (US-010, BUG-08) -->
+            <div class="botanical-card" style="display: flex; gap: 12px; align-items: center; background: linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%); border-color: #86EFAC;">
+              <img id="user-avatar-img" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80" style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover; border: 2px solid var(--forest-green);" alt="Avatar">
+              <div style="flex: 1;">
+                <div style="font-weight: 800; font-size: 13.5px; color: var(--forest-dark);" id="profile-user-name">Nguyễn Văn An</div>
+                <div style="font-size: 11px; color: var(--forest-green); font-weight: 700;" id="profile-garden-name">🌿 Vườn Ban Công Quận 7</div>
+                <div style="font-size: 10.5px; color: var(--text-muted);" id="profile-sun-dir">Hướng Đông (Nắng sáng dịu 4h/ngày)</div>
+              </div>
+              <button class="btn-act btn-act-water" style="font-size: 10.5px; padding: 6px 10px; width: auto;" onclick="openProfileEditModal()">
+                ✏️ Sửa
+              </button>
+            </div>
+
             <!-- Chế độ Đi vắng / Nghỉ dưỡng (US-036) -->
             <div class="botanical-card" style="display: flex; align-items: center; justify-content: space-between;">
               <div>
@@ -689,6 +654,16 @@
             <button class="btn-main-green" onclick="exportPlantCareReportPdf()">
               📥 Xuất Báo Cáo Chăm Sóc Ra File Tải Về
             </button>
+
+            <!-- NÚT QUẢN LÝ CÂY: ĐỔI VỊ TRÍ & XÓA CÂY (US-023, US-024, BUG-02) -->
+            <div style="display: flex; gap: 8px; margin-top: 8px;">
+              <button class="btn-act btn-act-postpone" style="flex: 1; font-size: 11px; padding: 10px;" onclick="promptEditPlantLocation()">
+                ✏️ Đổi Vị Trí / Chậu
+              </button>
+              <button class="btn-act btn-act-postpone" style="flex: 1; font-size: 11px; padding: 10px; color: #EF4444; border-color: #FCA5A5;" onclick="deleteOrArchivePlant()">
+                🗑️ Xóa / Cho Tặng
+              </button>
+            </div>
           </div>
         </div>
 
@@ -812,6 +787,168 @@
           </div>
         </div>
 
+        <!-- ================= MODAL PHÒNG VIDEO CALL CHUYÊN GIA 1-1 TRỰC TUYẾN (US-087, BUG-01) ================= -->
+        <div class="modal-overlay" id="expert-videocall-modal" style="align-items: center; padding: 12px;">
+          <div class="modal-sheet" style="border-radius: 28px; max-height: 94%; padding: 16px; background: #0B132B; color: #fff;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="width: 10px; height: 10px; border-radius: 50%; background: #EF4444; display: inline-block; animation: pulseMic 1s infinite;"></span>
+                <span style="font-size: 13.5px; font-weight: 800; color: #4ADE80;">PHÒNG TƯ VẤN TRỰC TUYẾN 1-1</span>
+              </div>
+              <div style="background: rgba(255,255,255,0.1); padding: 4px 8px; border-radius: 8px; font-size: 11px; font-weight: 800; color: #F59E0B;" id="call-timer">
+                ⏱️ 14:59
+              </div>
+            </div>
+
+            <!-- Khung hình Video Chuyên Gia -->
+            <div style="position: relative; width: 100%; height: 260px; border-radius: 18px; overflow: hidden; background: #1C2541; border: 1px solid rgba(255,255,255,0.15);">
+              <img src="https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=600&q=80" style="width: 100%; height: 100%; object-fit: cover;" alt="Dr. Trần Anh Dũng">
+              <div style="position: absolute; bottom: 10px; left: 10px; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); padding: 4px 10px; border-radius: 10px; font-size: 11px; font-weight: 700;">
+                👨‍🌾 ThS. Kỹ Sư Trần Anh Dũng (Đang trực tuyến)
+              </div>
+
+              <!-- Video PiP góc dưới của người dùng -->
+              <div style="position: absolute; bottom: 10px; right: 10px; width: 85px; height: 115px; border-radius: 12px; overflow: hidden; border: 2px solid var(--forest-green); background: #000; box-shadow: 0 4px 12px rgba(0,0,0,0.5);">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" style="width: 100%; height: 100%; object-fit: cover;" alt="User Camera">
+                <div style="position: absolute; bottom: 2px; right: 4px; font-size: 8px; background: rgba(0,0,0,0.6); padding: 1px 4px; border-radius: 4px;">Bạn</div>
+              </div>
+            </div>
+
+            <!-- Tin nhắn trực tiếp tư vấn chuyên môn -->
+            <div style="background: rgba(255,255,255,0.06); border-radius: 12px; padding: 10px; margin: 10px 0; font-size: 11.5px; line-height: 1.45; color: #E2E8F0;">
+              <b>Chuyên gia:</b> "Chào anh An! Tôi đã xem qua kết quả AI quét vết đốm trên lá Hồng. Đây là giai đoạn đầu của nấm phấn trắng, hãy áp dụng ngay công thức pha Baking soda + Neem 3 ngày/lần nhé!"
+            </div>
+
+            <!-- Thanh điều khiển cuộc gọi -->
+            <div style="display: flex; justify-content: center; align-items: center; gap: 14px; margin-top: 12px;">
+              <button class="btn-scenario" style="border-radius: 50%; width: 44px; height: 44px; padding: 0; display: flex; align-items: center; justify-content: center; font-size: 16px;" onclick="showToast('Đã tắt/bật Microphone')">🎤</button>
+              <button class="btn-scenario" style="border-radius: 50%; width: 44px; height: 44px; padding: 0; display: flex; align-items: center; justify-content: center; font-size: 16px;" onclick="showToast('Đã đổi Camera trước/sau')">📷</button>
+              <button style="border-radius: 50%; width: 50px; height: 50px; background: #EF4444; border: none; color: #fff; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 14px rgba(239,68,68,0.5);" onclick="closeExpertVideoCall()">
+                📞
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================= MODAL CHI TIẾT BỆNH BÁCH KHOA (US-082, BUG-05) ================= -->
+        <div class="modal-overlay" id="disease-detail-modal">
+          <div class="modal-sheet">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+              <div style="font-size: 15.5px; font-weight: 800; color: var(--forest-dark);" id="modal-disease-title">Bệnh Phấn Trắng</div>
+              <button style="border: none; background: none; font-size: 20px; font-weight: 800; cursor: pointer; color: var(--text-muted);" onclick="closeDiseaseDetailModal()">×</button>
+            </div>
+            <div style="font-size: 11px; font-style: italic; color: var(--text-muted); margin-bottom: 8px;" id="modal-disease-sci">Tên khoa học</div>
+
+            <div style="background: #F8FAFC; border-radius: 12px; padding: 10px; font-size: 11.5px; line-height: 1.5; margin-bottom: 10px;">
+              <div style="font-weight: 700; color: var(--forest-dark); margin-bottom: 2px;">🌿 Cây trồng mẫn cảm:</div>
+              <div id="modal-disease-plants" style="margin-bottom: 6px;">Hoa hồng, Cúc, Dưa leo</div>
+
+              <div style="font-weight: 700; color: var(--forest-dark); margin-bottom: 2px;">🔍 Triệu chứng nhận biết:</div>
+              <div id="modal-disease-symptoms" style="margin-bottom: 6px;">Lớp bụi trắng mịn phủ bề mặt lá, lá non xoăn tít lại và ngừng đâm chồi.</div>
+
+              <div style="font-weight: 700; color: #15803D; margin-bottom: 2px;">🧬 Phác đồ sinh học Safe-First:</div>
+              <div id="modal-disease-protocol">Baking soda 5g/L + Dầu Neem 5ml/L, vi sinh Bacillus subtilis.</div>
+            </div>
+
+            <button class="btn-main-green" id="btn-apply-disease-protocol" onclick="applyDiseaseFromEncyclopedia()">
+              🌿 Áp Dụng Phác Đồ Này Sang Màn Hình Điều Trị
+            </button>
+          </div>
+        </div>
+
+        <!-- ================= MODAL CHIA SẺ HỘI NHÓM (US-056, BUG-06) ================= -->
+        <div class="modal-overlay" id="share-diagnosis-modal">
+          <div class="modal-sheet">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+              <div style="font-size: 15px; font-weight: 800; color: var(--forest-dark);">Chia Sẻ Bệnh Án Đến Cộng Đồng</div>
+              <button style="border: none; background: none; font-size: 20px; font-weight: 800; cursor: pointer; color: var(--text-muted);" onclick="closeShareModal()">×</button>
+            </div>
+
+            <div style="font-size: 11.5px; color: var(--text-muted); margin-bottom: 12px;">
+              Hỏi ý kiến các người làm vườn dày dạn kinh nghiệm hoặc chia sẻ phác đồ hữu ích cho bạn bè:
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px;">
+              <button class="btn-act btn-act-postpone" style="justify-content: flex-start; padding: 10px;" onclick="confirmShareGroup('Hội Trồng Cây Ban Công Sài Gòn (85.000 thành viên)')">
+                👥 Chia sẻ lên <b>Hội Trồng Cây Ban Công Sài Gòn</b>
+              </button>
+              <button class="btn-act btn-act-postpone" style="justify-content: flex-start; padding: 10px;" onclick="confirmShareGroup('Cộng Đồng Hoa Hồng & Cây Cảnh Hà Nội')">
+                🌹 Chia sẻ lên <b>Cộng Đồng Hoa Hồng Việt Nam</b>
+              </button>
+              <button class="btn-act btn-act-postpone" style="justify-content: flex-start; padding: 10px;" onclick="confirmShareGroup('Gửi tin nhắn Zalo kèm kết quả')">
+                💬 Gửi qua tin nhắn <b>Zalo / Facebook</b>
+              </button>
+            </div>
+
+            <button class="btn-main-green" onclick="copyDiagnosisLink()">
+              📋 Sao Chép Đường Link Bệnh Án
+            </button>
+          </div>
+        </div>
+
+        <!-- ================= MODAL GÓP Ý KẾT QUẢ SAI / ACTIVE LEARNING (US-057, BUG-07) ================= -->
+        <div class="modal-overlay" id="feedback-diagnosis-modal">
+          <div class="modal-sheet">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+              <div style="font-size: 15px; font-weight: 800; color: var(--forest-dark);">Góp Ý Kết Quả Cho AI Học Lại</div>
+              <button style="border: none; background: none; font-size: 20px; font-weight: 800; cursor: pointer; color: var(--text-muted);" onclick="closeFeedbackModal()">×</button>
+            </div>
+
+            <div style="font-size: 11.5px; color: var(--text-muted); margin-bottom: 10px;">
+              Đóng góp của bạn giúp mô hình AI nâng cao độ chính xác khi nhận diện bệnh cây cảnh nhiệt đới.
+            </div>
+
+            <label style="font-size: 11.5px; font-weight: 700;">Theo bạn bệnh thực tế trên lá là gì?</label>
+            <select id="feedback-actual-disease" style="width: 100%; padding: 8px 10px; border-radius: 10px; border: 1px solid var(--border-subtle); font-size: 11.5px; margin: 4px 0 10px 0;">
+              <option value="Bệnh Đốm Đen Thán Thư">Bệnh Đốm Đen Thán Thư</option>
+              <option value="Bọ Trĩ Chích Hút Đọt Non">Bọ Trĩ Chích Hút Đọt Non</option>
+              <option value="Cháy Nắng Rìa Lá Sốc Nhiệt">Cháy Nắng Rìa Lá Sốc Nhiệt</option>
+              <option value="Dư Phân Bón Lá Gây Ngộ Độc">Dư Phân Bón Lá Gây Ngộ Độc</option>
+              <option value="Bụi Bẩn Môi Trường Bám Vào">Bụi Bẩn Môi Trường Bám Vào (Không phải bệnh)</option>
+            </select>
+
+            <label style="font-size: 11.5px; font-weight: 700;">Ghi chú triệu chứng thực tế tại vườn:</label>
+            <textarea id="feedback-comment" placeholder="Ví dụ: Vết này chỉ hơi vàng mép lá do nắng hướng Tây gắt, không có lớp bột nấm..." style="width: 100%; height: 70px; padding: 8px 10px; border-radius: 10px; border: 1px solid var(--border-subtle); font-size: 11.5px; margin: 4px 0 12px 0; outline: none;"></textarea>
+
+            <button class="btn-main-green" onclick="submitDiagnosisFeedback()">
+              🚀 Gửi Mẫu Về Kho Tái Huấn Luyện AI
+            </button>
+          </div>
+        </div>
+
+        <!-- ================= MODAL CHỈNH SỬA HỒ SƠ NGƯỜI DÙNG (US-010, BUG-08) ================= -->
+        <div class="modal-overlay" id="profile-edit-modal">
+          <div class="modal-sheet">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+              <div style="font-size: 15px; font-weight: 800; color: var(--forest-dark);">Chỉnh Sửa Hồ Sơ Làm Vườn</div>
+              <button style="border: none; background: none; font-size: 20px; font-weight: 800; cursor: pointer; color: var(--text-muted);" onclick="closeProfileEditModal()">×</button>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 10px; font-size: 12px;">
+              <div>
+                <label style="font-weight: 700;">Họ và tên người làm vườn:</label>
+                <input type="text" id="edit-profile-name" value="Nguyễn Văn An" style="width: 100%; padding: 8px 10px; border-radius: 10px; border: 1px solid var(--border-subtle); margin-top: 4px;">
+              </div>
+              <div>
+                <label style="font-weight: 700;">Tên khu vườn / Địa điểm:</label>
+                <input type="text" id="edit-profile-garden" value="🌿 Vườn Ban Công Quận 7" style="width: 100%; padding: 8px 10px; border-radius: 10px; border: 1px solid var(--border-subtle); margin-top: 4px;">
+              </div>
+              <div>
+                <label style="font-weight: 700;">Hướng nắng ban công:</label>
+                <select id="edit-profile-sun" style="width: 100%; padding: 8px 10px; border-radius: 10px; border: 1px solid var(--border-subtle); margin-top: 4px;">
+                  <option value="Hướng Đông (Nắng sáng dịu 4h/ngày)">Hướng Đông (Nắng sáng dịu 4h/ngày)</option>
+                  <option value="Hướng Tây (Nắng chiều gắt 5h/ngày)">Hướng Tây (Nắng chiều gắt 5h/ngày)</option>
+                  <option value="Hướng Nam (Đón gió & nắng vừa)">Hướng Nam (Đón gió & nắng vừa)</option>
+                  <option value="Sân thượng (Nắng trực tiếp cả ngày)">Sân thượng (Nắng trực tiếp cả ngày)</option>
+                </select>
+              </div>
+              <button class="btn-main-green" onclick="saveUserProfile()">
+                Lưu Thay Đổi Hồ Sơ
+              </button>
+            </div>
+          </div>
+        </div>
+
         <!-- BOTTOM NAVIGATION BAR -->
         <div class="bottom-nav">
           <button class="nav-btn active" id="nav-home" onclick="goToTab('tab-home', this)">
@@ -890,6 +1027,10 @@
         health: "Tươi tốt • 12 nụ",
         healthClass: "healthy",
         image: "https://images.unsplash.com/photo-1548625361-195fe61a55c3?auto=format&fit=crop&w=400&q=80",
+        moisture: 22,
+        waterReq: "450ml",
+        isWatered: false,
+        isPostponed: false,
         timeline: [
           "20/09/2026: Trồng chậu mới bằng giá thể đất thịt + trấu hun.",
           "05/10/2026: Bón phân trùn quế đợt 1, bấm ngọn kích nhánh.",
@@ -904,6 +1045,10 @@
         health: "Cần che nắng gắt",
         healthClass: "warning",
         image: "https://images.unsplash.com/photo-1509423350716-97f9360b4e09?auto=format&fit=crop&w=400&q=80",
+        moisture: 65,
+        waterReq: "100ml",
+        isWatered: true,
+        isPostponed: false,
         timeline: [
           "01/10/2026: Tách bụi từ cây mẹ, trộn giá thể perlite 50%.",
           "15/10/2026: Rễ con bám chắc, bắt đầu cho hứng nắng nhẹ."
@@ -917,6 +1062,10 @@
         health: "Đang chín mọng",
         healthClass: "healthy",
         image: "https://images.unsplash.com/photo-1592841200221-a6898f307baa?auto=format&fit=crop&w=400&q=80",
+        moisture: 32,
+        waterReq: "600ml",
+        isWatered: false,
+        isPostponed: false,
         timeline: [
           "10/08/2026: Gieo hạt ươm mầm trong khay xơ dừa.",
           "01/09/2026: Chuyển chậu lớn, làm giàn chữ A.",
@@ -931,6 +1080,10 @@
         health: "Đang xịt dầu Neem",
         healthClass: "danger",
         image: "https://images.unsplash.com/photo-1588252303782-cb80119abd6d?auto=format&fit=crop&w=400&q=80",
+        moisture: 78,
+        waterReq: "350ml",
+        isWatered: true,
+        isPostponed: false,
         timeline: [
           "12/09/2026: Mua cây giống tại Nông Nghiệp Phố Cầu Giấy.",
           "21/10/2026: Phát hiện phấn trắng nhẹ, bắt đầu phun phác đồ Safe-First."
@@ -938,7 +1091,7 @@
       }
     ];
 
-    // 6 Bộ ảnh mẫu bệnh chụp thực tế (US-037, US-048)
+    // 6 Bộ ảnh mẫu bệnh chụp thực tế (US-037, US-048) kèm bản đồ nhiệt Grad-CAM riêng biệt (BUG-04)
     const DISEASE_SAMPLES = [
       {
         id: "powdery_mildew",
@@ -948,6 +1101,7 @@
         conf: "88.5%",
         explanation: "Bản đồ nhiệt tập trung mảng bột trắng ở mép lá non, làm diệp lục suy giảm và biến dạng chồi.",
         img: "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=700&q=80",
+        gradCamStyle: "radial-gradient(circle at 35% 35%, rgba(239, 68, 68, 0.9) 0%, rgba(245, 158, 11, 0.7) 35%, transparent 55%), radial-gradient(circle at 65% 60%, rgba(239, 68, 68, 0.85) 0%, rgba(245, 158, 11, 0.6) 30%, transparent 50%)",
         step1: "Cách ly chậu cây tối thiểu 1.5 - 2m. Cắt bỏ lá bệnh bằng kéo lau cồn 70°. Buộc túi kín tiêu hủy.",
         step2: "5g Baking Soda + 5ml Dầu Neem ép lạnh + 2ml nước rửa chén sinh học / 1 Lít nước ấm. Phun lúc 17h30.",
         step3: "Hoạt chất vi sinh đối kháng Bacillus subtilis hoặc Trichoderma harzianum. 100% an toàn cho chó mèo."
@@ -960,6 +1114,7 @@
         conf: "91.2%",
         explanation: "Vùng nhiệt Grad-CAM khoanh vùng các vết đốm nâu đồng tâm có quầng vàng xung quanh phiến lá già.",
         img: "https://images.unsplash.com/photo-1592841200221-a6898f307baa?auto=format&fit=crop&w=700&q=80",
+        gradCamStyle: "radial-gradient(ellipse at 75% 70%, rgba(220, 38, 38, 0.92) 0%, rgba(234, 88, 12, 0.7) 40%, transparent 68%), radial-gradient(circle at 30% 40%, rgba(239, 68, 68, 0.75) 0%, transparent 35%)",
         step1: "Tỉa bỏ toàn bộ lá già sát gốc bị đốm nâu để thông thoáng đất, không để nước tưới bắn mầm bệnh từ đất lên lá.",
         step2: "Dung dịch tỏi ớt gừng ngâm rượu pha loãng (10ml rượu tỏi ớt / 1L nước) kết hợp 3ml dầu Neem.",
         step3: "Chế phẩm Copper Hydroxide (Đồng sinh học) hoặc dung dịch vi sinh vật bản địa IMO4 an toàn."
@@ -972,6 +1127,7 @@
         conf: "94.0%",
         explanation: "Mô lá ngậm nước bị mềm nhũn chuyển màu thâm đen do đọng nước úng kéo dài ở đáy chậu.",
         img: "https://images.unsplash.com/photo-1509423350716-97f9360b4e09?auto=format&fit=crop&w=700&q=80",
+        gradCamStyle: "radial-gradient(circle at 50% 82%, rgba(185, 28, 28, 0.95) 0%, rgba(239, 68, 68, 0.8) 45%, rgba(245, 158, 11, 0.5) 65%, transparent 80%)",
         step1: "Nhổ cây ra khỏi đất ngay lập tức. Cắt bỏ phần thân thối cho đến khi chạm mô xanh, bôi vôi hoặc cồn se sẹo.",
         step2: "Để cây nơi thoáng gió, khô ráo 3-5 ngày. Tuyệt đối không tưới nước vào vết thương hở.",
         step3: "Tưới nấm đối kháng Trichoderma pha loãng vào giá thể đất mới thoát nước nhanh (xỉ than + perlite 50%)."
@@ -984,6 +1140,7 @@
         conf: "87.0%",
         explanation: "Các đốm bệnh nhỏ giọt dầu màu nâu đen rải rác mặt dưới lá gây rụng lá hàng loạt.",
         img: "https://images.unsplash.com/photo-1588252303782-cb80119abd6d?auto=format&fit=crop&w=700&q=80",
+        gradCamStyle: "radial-gradient(circle at 25% 30%, rgba(239, 68, 68, 0.88) 0%, transparent 22%), radial-gradient(circle at 62% 45%, rgba(239, 68, 68, 0.88) 0%, transparent 22%), radial-gradient(circle at 45% 75%, rgba(245, 158, 11, 0.88) 0%, transparent 25%)",
         step1: "Vặt bỏ lá rụng dưới gốc và tỉa cành thoáng. Cách ly chậu không để nước mưa giọt bắn sang chậu khác.",
         step2: "Dung dịch nước vôi trong pha loãng (10ml nước vôi trong / 1L nước) tạo môi trường kiềm ức chế vi khuẩn.",
         step3: "Xịt Nano Bạc sinh học (25ppm) diệt khuẩn tiếp xúc, an toàn không gây ngộ độc cho người hái ớt."
@@ -996,8 +1153,9 @@
         conf: "96.0%",
         explanation: "Phiến lá non chuyển vàng nhạt nhưng các đường gân lá vẫn giữ màu xanh đậm đối xứng rõ nét.",
         img: "https://images.unsplash.com/photo-1614594975525-e45190c55d0b?auto=format&fit=crop&w=700&q=80",
+        gradCamStyle: "radial-gradient(ellipse at 50% 50%, rgba(234, 179, 8, 0.88) 0%, rgba(245, 158, 11, 0.6) 50%, transparent 75%)",
         step1: "Không cần cách ly (Hiện tượng phi sinh học, không lây nhiễm sang cây khác). Chỉnh lại pH đất chậu.",
-        step2: "Dùng giấm gạo pha loãng 2ml/L nước tưới gốc để hạ độ kiềm của đất, giúp rễ hấp thụ vi chất tự nhiên.",
+        step2: "Dung giấm gạo pha loãng 2ml/L nước tưới gốc để hạ độ kiềm của đất, giúp rễ hấp thụ vi chất tự nhiên.",
         step3: "Bổ sung Sắt Chelate Fe-EDDHA 6% (pha 1g/L nước) tưới gốc hoặc phun qua lá. Cây xanh lại sau 5 ngày."
       },
       {
@@ -1008,6 +1166,7 @@
         conf: "95.5%",
         explanation: "Mặt dưới lá có màng tơ mỏng, lấm tấm chấm bạc do dịch bào bị nhện đỏ chích hút khi thời tiết khô nóng.",
         img: "https://images.unsplash.com/photo-1533038590840-1cde6e668a91?auto=format&fit=crop&w=700&q=80",
+        gradCamStyle: "radial-gradient(circle at 48% 52%, rgba(249, 115, 22, 0.9) 0%, rgba(239, 68, 68, 0.65) 45%, transparent 78%)",
         step1: "Cách ly chậu cây. Dùng vòi xịt nước áp lực cao rửa trôi mạng tơ và trứng nhện ở mặt dưới lá vào buổi sáng.",
         step2: "Dầu Neem nguyên chất ép lạnh 5ml + 2ml nước rửa chén sinh học / 1L nước ấm, phun 3 ngày/lần.",
         step3: "Tăng độ ẩm môi trường ban công. Tuyệt đối không xịt thuốc trừ nấm vì sẽ tiêu diệt thiên địch của nhện đỏ."
@@ -1015,30 +1174,39 @@
     ];
 
     // Danh mục Từ điển Bách khoa 25+ sâu bệnh (US-082)
+    // Danh mục Từ điển Bách khoa 25+ sâu bệnh (US-082)
     const ENCYCLOPEDIA_DATA = [
-      { id: "e1", name: "Bệnh Phấn Trắng", sci: "Erysiphe / Podosphaera spp.", cat: "Nấm", plant: "Hoa hồng, Cúc, Dưa leo", remedy: "Baking soda 5g/L + Dầu Neem 5ml/L, vi sinh Bacillus subtilis." },
-      { id: "e2", name: "Đốm Đen Hoa Hồng", sci: "Diplocarpon rosae", cat: "Nấm", plant: "Hoa hồng leo, hồng bụi", remedy: "Cắt tỉa lá gốc, phun dịch rượu tỏi ớt gừng hoặc Đồng sinh học." },
-      { id: "e3", name: "Nhện Đỏ Hại Lá", sci: "Tetranychus urticae", cat: "Côn trùng", plant: "Hoa hồng, Mai vàng, Trầu bà", remedy: "Xịt nước rửa trôi mặt dưới lá, phun dầu Neem lạnh 5ml/L." },
-      { id: "e4", name: "Rệp Sáp Trắng Bông", sci: "Pseudococcidae", cat: "Côn trùng", plant: "Kim tiền, Lưỡi hổ, Hoa giấy", remedy: "Dùng tăm bông nhúng cồn lau cơ học, phun xịt nước rửa chén loãng." },
-      { id: "e5", name: "Bọ Trĩ Hại Đọt Non", sci: "Scirtothrips dorsalis", cat: "Côn trùng", plant: "Hoa hồng, Cà tím, Ớt", remedy: "Treo bẫy dính màu vàng, phun dầu khoáng sinh học lúc chiều mát." },
-      { id: "e6", name: "Vàng Lá Thiếu Sắt (Fe)", sci: "Iron Chlorosis", cat: "Dinh dưỡng", plant: "Dành dành, Cẩm tú cầu, Tùng", remedy: "Tưới bổ sung Sắt Chelate Fe-EDDHA 6% (1g/L nước), chỉnh pH đất." },
-      { id: "e7", name: "Vàng Lá Thiếu Magie (Mg)", sci: "Magnesium Deficiency", cat: "Dinh dưỡng", plant: "Cà chua, Ớt, Kiểng lá", remedy: "Bón muối Epsom (Magie Sunfat) 2g/L nước tưới gốc định kỳ." },
-      { id: "e8", name: "Bệnh Thối Rễ Do Úng", sci: "Pythium / Phytophthora", cat: "Rễ", plant: "Sen đá, Monstera, Kim ngân", remedy: "Gọt bỏ rễ thối đen ngâm Oxy già 3% loãng, thay đất perlite mới." },
-      { id: "e9", name: "Cháy Nắng Rìa Lá (Sốc Nhiệt)", sci: "Sun Scald / Heat Stress", cat: "Rễ", plant: "Kiểng lá Nam Mỹ, Sen đá", remedy: "Che lưới lan 70%, phun sương xung quanh nền chậu hạ nhiệt." }
+      { id: "e1", name: "Bệnh Phấn Trắng", sci: "Erysiphe / Podosphaera spp.", cat: "Nấm", plant: "Hoa hồng, Cúc, Dưa leo", symptoms: "Lớp bụi phấn trắng mịn phủ kín phiến lá non, làm quéo ngọn và rụng hoa non.", remedy: "Baking soda 5g/L + Dầu Neem 5ml/L, vi sinh Bacillus subtilis." },
+      { id: "e2", name: "Đốm Đen Hoa Hồng", sci: "Diplocarpon rosae", cat: "Nấm", plant: "Hoa hồng leo, hồng bụi", symptoms: "Vết đốm đen tròn viền răng cưa quanh phiến lá già, lá vàng và rụng đồng loạt.", remedy: "Cắt tỉa lá gốc sát đất, phun dịch rượu tỏi ớt gừng hoặc Đồng sinh học." },
+      { id: "e3", name: "Nhện Đỏ Hại Lá", sci: "Tetranychus urticae", cat: "Côn trùng", plant: "Hoa hồng, Mai vàng, Trầu bà", symptoms: "Mặt dưới lá giăng tơ mỏng, lấm tấm chấm bạc do dịch bào bị hút cạn.", remedy: "Xịt nước áp lực cao rửa trôi mặt dưới lá, phun dầu Neem lạnh 5ml/L." },
+      { id: "e4", name: "Rệp Sáp Trắng Bông", sci: "Pseudococcidae", cat: "Côn trùng", plant: "Kim tiền, Lưỡi hổ, Hoa giấy", symptoms: "Từng cục bông trắng xốp bám chặt ở nách cuống lá, tiết dịch ngọt gây kiến bu.", remedy: "Dùng tăm bông nhúng cồn 70° lau cơ học, phun xịt nước rửa chén sinh học loãng." },
+      { id: "e5", name: "Bọ Trĩ Hại Đọt Non", sci: "Scirtothrips dorsalis", cat: "Côn trùng", plant: "Hoa hồng, Cà tím, Ớt", symptoms: "Lá non xoăn tít lại, gân lá thâm đen, mép lá cong queo như thuyền buồm.", remedy: "Treo bẫy dính màu vàng, phun dầu khoáng sinh học lúc 17h30 chiều mát." },
+      { id: "e6", name: "Vàng Lá Thiếu Sắt (Fe)", sci: "Iron Chlorosis", cat: "Dinh dưỡng", plant: "Dành dành, Cẩm tú cầu, Tùng", symptoms: "Phiến lá non chuyển vàng nhạt nhưng các đường gân lá vẫn giữ màu xanh đậm.", remedy: "Tưới bổ sung Sắt Chelate Fe-EDDHA 6% (1g/L nước), chỉnh pH đất 6.0 - 6.5." },
+      { id: "e7", name: "Vàng Lá Thiếu Magie (Mg)", sci: "Magnesium Deficiency", cat: "Dinh dưỡng", plant: "Cà chua, Ớt, Kiểng lá", symptoms: "Vàng úng loang lổ giữa các gân lá ở các tầng lá già phía dưới thân.", remedy: "Bón muối Epsom (Magie Sunfat) 2g/L nước tưới gốc định kỳ 10 ngày/lần." },
+      { id: "e8", name: "Bệnh Thối Rễ Do Úng", sci: "Pythium / Phytophthora", cat: "Rễ", plant: "Sen đá, Monstera, Kim ngân", symptoms: "Cây rũ lá đột ngột dù đất vẫn ướt sũng, rễ đen nhũn có mùi thối hôi.", remedy: "Gọt bỏ rễ thối đen ngâm Oxy già 3% loãng, thay đất perlite xỉ than mới." },
+      { id: "e9", name: "Cháy Nắng Rìa Lá (Sốc Nhiệt)", sci: "Sun Scald / Heat Stress", cat: "Rễ", plant: "Kiểng lá Nam Mỹ, Sen đá", symptoms: "Mép lá bị khô giòn màu nâu sẫm sau các đợt nắng gắt buổi trưa nhiệt độ >36°C.", remedy: "Che lưới lan 70%, phun sương ẩm quanh sàn ban công để giải nhiệt cây." }
     ];
 
     // Khởi tạo LocalStorage State
     let userPlants = JSON.parse(localStorage.getItem('up_user_plants')) || DEFAULT_PLANTS;
     let isVacationMode = JSON.parse(localStorage.getItem('up_vacation_mode')) || false;
     let isVipActive = JSON.parse(localStorage.getItem('up_vip_active')) || true;
+    let userProfile = JSON.parse(localStorage.getItem('up_user_profile')) || {
+      name: "Nguyễn Văn An",
+      garden: "🌿 Vườn Ban Công Quận 7",
+      sun: "Hướng Đông (Nắng sáng dịu 4h/ngày)"
+    };
     let selectedDiseaseIdx = 0;
     let ttsRate = 1.0;
     let selectedSlotTime = "14:30";
+    let activeCallTimer = null;
+    let currentDetailPlantId = null;
 
     function saveState() {
       localStorage.setItem('up_user_plants', JSON.stringify(userPlants));
       localStorage.setItem('up_vacation_mode', JSON.stringify(isVacationMode));
       localStorage.setItem('up_vip_active', JSON.stringify(isVipActive));
+      localStorage.setItem('up_user_profile', JSON.stringify(userProfile));
     }
 
     // ================= HÀM TIỆN ÍCH UI =================
@@ -1066,10 +1234,10 @@
       if (btn) {
         btn.classList.add('active');
       } else {
-        if (tabId === 'tab-home') document.getElementById('nav-home').classList.add('active');
-        if (tabId === 'tab-voice') document.getElementById('nav-voice').classList.add('active');
-        if (tabId === 'tab-treatment') document.getElementById('nav-treatment').classList.add('active');
-        if (tabId === 'tab-more') document.getElementById('nav-more').classList.add('active');
+        if (tabId === 'tab-home') document.getElementById('nav-home')?.classList.add('active');
+        if (tabId === 'tab-voice') document.getElementById('nav-voice')?.classList.add('active');
+        if (tabId === 'tab-treatment') document.getElementById('nav-treatment')?.classList.add('active');
+        if (tabId === 'tab-more') document.getElementById('nav-more')?.classList.add('active');
       }
       logAPI(`[NAV] Chuyển màn hình: ${tabId}`);
     }
@@ -1078,21 +1246,24 @@
     function renderGardenGrid() {
       const container = document.getElementById('garden-grid-container');
       const countEl = document.getElementById('plant-count');
-      countEl.innerText = userPlants.length;
+      if (countEl) countEl.innerText = userPlants.length;
 
-      container.innerHTML = userPlants.map(p => `
-        <div class="garden-card" onclick="openPlantDetailModal(${p.id})">
-          <img src="${p.image}" class="garden-card-img" alt="${p.name}">
-          <div class="garden-card-title">${p.name}</div>
-          <div class="garden-card-sub">${p.location} • ${p.pot}</div>
-          <div class="health-pill ${p.healthClass}">${p.health}</div>
-        </div>
-      `).join('');
+      if (container) {
+        container.innerHTML = userPlants.map(p => `
+          <div class="garden-card" onclick="openPlantDetailModal(${p.id})">
+            <img src="${p.image}" class="garden-card-img" alt="${p.name}">
+            <div class="garden-card-title">${p.name}</div>
+            <div class="garden-card-sub">${p.location} • ${p.pot}</div>
+            <div class="health-pill ${p.healthClass}">${p.health}</div>
+          </div>
+        `).join('');
+      }
     }
 
     // Render Strip 6 mẫu bệnh chụp thật
     function renderDiseaseSamples() {
       const box = document.getElementById('sample-strip-box');
+      if (!box) return;
       box.innerHTML = DISEASE_SAMPLES.map((s, idx) => `
         <div class="sample-item ${idx === selectedDiseaseIdx ? 'active' : ''}" onclick="selectDiseaseSample(${idx})">
           <img src="${s.img}" alt="${s.name}">
@@ -1110,6 +1281,12 @@
       document.getElementById('diag-conf-badge').innerText = `Tin cậy: ${s.conf}`;
       document.getElementById('diag-explanation').innerHTML = `<b>Căn cứ chẩn đoán AI:</b> ${s.explanation}`;
       
+      // Áp dụng bản đồ nhiệt Grad-CAM khớp đúng vị trí vết bệnh (BUG-04)
+      const overlay = document.getElementById('heatmap-overlay');
+      if (s.gradCamStyle && overlay) {
+        overlay.style.background = s.gradCamStyle;
+      }
+
       // Cập nhật tab phác đồ
       document.getElementById('treatment-for-disease').innerText = s.name;
       document.getElementById('step-1-content').innerHTML = `• ${s.step1.replace(/\\n/g, '<br>• ')}`;
@@ -1188,43 +1365,79 @@
       document.getElementById('opacity-label').innerText = `Vùng nhiệt Grad-CAM: ${val}%`;
     }
 
-    // ================= TƯƠNG TÁC TƯỚI NƯỚC (US-027 - US-029) =================
-    function handleWaterAction(id) {
-      const item = document.getElementById(`task-plant-${id}`);
-      const btn = document.getElementById(`btn-water-${id}`);
-      const bar = document.getElementById(`moisture-bar-${id}`);
-      const text = document.getElementById(`moisture-text-${id}`);
-      const status = document.getElementById(`moisture-status-${id}`);
+    // ================= LỊCH TƯỚI NƯỚC ĐỘNG TỪ USERPLANTS (US-027 - US-029, BUG-03) =================
+    function renderWateringTasks() {
+      const container = document.getElementById('watering-task-container');
+      const badge = document.getElementById('task-badge');
+      if (!container) return;
 
-      if (item.classList.contains('completed')) {
-        item.classList.remove('completed');
-        btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg> Đã tưới nước`;
-        bar.style.width = id === 1 ? '22%' : '32%';
-        bar.className = 'moisture-fill low';
-        text.innerText = id === 1 ? 'Độ ẩm đất: 22%' : 'Độ ẩm đất: 32%';
-        status.innerText = id === 1 ? 'Rất khô' : 'Đang thiếu';
-        status.style.color = '#EF4444';
-      } else {
-        item.classList.add('completed');
-        item.classList.remove('postponed');
-        btn.innerHTML = `✓ Đã hoàn thành`;
-        bar.style.width = '88%';
-        bar.className = 'moisture-fill good';
-        text.innerText = 'Độ ẩm đất: 88%';
-        status.innerText = 'Đủ ẩm lý tưởng';
-        status.style.color = '#10B981';
-        showToast(`Đã ghi nhận tưới nước cho cây #${id} thành công!`);
-        logAPI(`[ACTION] US-029: Tưới nước cây #${id} -> Lưu lịch sử.`);
+      const pendingCount = userPlants.filter(p => !p.isWatered).length;
+      if (badge) {
+        badge.innerText = `${pendingCount} chậu cần tưới`;
+        badge.className = pendingCount > 0 ? 'health-pill danger' : 'health-pill healthy';
       }
+
+      container.innerHTML = userPlants.map(p => {
+        const isLow = p.moisture < 45;
+        const statusText = p.isWatered ? 'Đủ ẩm lý tưởng' : (isLow ? 'Rất khô' : 'Đang thiếu');
+        const statusColor = p.isWatered ? '#10B981' : (isLow ? '#EF4444' : '#F59E0B');
+        const fillClass = p.isWatered ? 'moisture-fill good' : 'moisture-fill low';
+        const fillWidth = p.isWatered ? '88%' : `${p.moisture}%`;
+
+        return `
+          <div class="watering-item ${p.isWatered ? 'completed' : ''} ${p.isPostponed ? 'postponed' : ''}" id="task-plant-${p.id}">
+            <div class="watering-top-row">
+              <img src="${p.image}" class="plant-thumb" alt="${p.name}">
+              <div class="watering-meta">
+                <div class="plant-name">${p.name}</div>
+                <div class="location-pill">${p.location} • Cần tưới ${p.waterReq || '350ml'}</div>
+              </div>
+            </div>
+            <div class="moisture-wrap">
+              <span>Độ ẩm đất: ${fillWidth}</span>
+              <div class="moisture-bar-bg">
+                <div class="${fillClass}" style="width: ${fillWidth};"></div>
+              </div>
+              <span style="font-weight: 700; color: ${statusColor};">${statusText}</span>
+            </div>
+            <div class="watering-actions">
+              <button class="btn-act btn-act-water" onclick="handleWaterAction(${p.id})">
+                ${p.isWatered ? '✓ Đã hoàn thành' : '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg> Đã tưới nước'}
+              </button>
+              <button class="btn-act btn-act-postpone" onclick="handlePostponeAction(${p.id})">
+                ${p.isPostponed ? '✓ Đã hoãn +1 ngày' : 'Hoãn 1 ngày'}
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function handleWaterAction(id) {
+      const plant = userPlants.find(p => p.id === id);
+      if (!plant) return;
+      plant.isWatered = !plant.isWatered;
+      if (plant.isWatered) {
+        plant.isPostponed = false;
+        plant.moisture = 88;
+        showToast(`Đã ghi nhận tưới nước cho ${plant.name}!`);
+        logAPI(`[ACTION] US-029: Tưới nước ${plant.name} -> Lưu lịch sử độ ẩm 88%.`);
+      } else {
+        plant.moisture = 25;
+        showToast(`Đã bỏ đánh dấu tưới nước cho ${plant.name}.`);
+      }
+      saveState();
+      renderWateringTasks();
     }
 
     function handlePostponeAction(id) {
-      const item = document.getElementById(`task-plant-${id}`);
-      const btn = document.getElementById(`btn-postpone-${id}`);
-      item.classList.add('postponed');
-      btn.innerText = '✓ Đã hoãn +1 ngày';
-      showToast(`Đã hoãn lịch tưới cho cây #${id} thêm 1 ngày!`);
-      logAPI(`[ACTION] US-029: Hoãn lịch tưới cây #${id} thêm 24h.`);
+      const plant = userPlants.find(p => p.id === id);
+      if (!plant) return;
+      plant.isPostponed = true;
+      saveState();
+      renderWateringTasks();
+      showToast(`Đã hoãn lịch tưới cho ${plant.name} thêm 1 ngày!`);
+      logAPI(`[ACTION] US-029: Hoãn lịch tưới ${plant.name} thêm 24h.`);
     }
 
     // ================= GIẢ LẬP THỜI TIẾT (US-031 - US-034) =================
@@ -1372,8 +1585,7 @@
       logAPI(`[VOICE] US-067..US-072: Input="${cmd}" -> Output executed.`);
     }
 
-    // ================= MODAL CHI TIẾT CÂY & XUẤT FILE THẬT (US-022, US-026) =================
-    let currentDetailPlantId = null;
+    // ================= MODAL CHI TIẾT CÂY & XUẤT FILE THẬT (US-022, US-026, BUG-02) =================
     function openPlantDetailModal(id) {
       const plant = userPlants.find(p => p.id === id);
       if (!plant) return;
@@ -1393,6 +1605,37 @@
 
     function closePlantDetailModal() {
       document.getElementById('plant-detail-modal').classList.remove('open');
+    }
+
+    // Đổi vị trí hoặc chậu trồng (BUG-02)
+    function promptEditPlantLocation() {
+      const plant = userPlants.find(p => p.id === currentDetailPlantId);
+      if (!plant) return;
+      const locations = ["Ban công Đông", "Ban công Tây", "Phòng khách", "Sân thượng"];
+      const currentIdx = locations.indexOf(plant.location);
+      const nextLoc = locations[(currentIdx + 1) % locations.length];
+      plant.location = nextLoc;
+      plant.timeline.push(`${new Date().toLocaleDateString('vi-VN')}: Đổi vị trí đặt sang ${nextLoc}.`);
+      saveState();
+      document.getElementById('modal-plant-loc').innerText = nextLoc;
+      renderGardenGrid();
+      renderWateringTasks();
+      showToast(`Đã chuyển vị trí chậu ${plant.name} sang: ${nextLoc}`);
+      logAPI(`[PLANT EDIT] US-023: Đổi vị trí cây #${plant.id} -> ${nextLoc}`);
+    }
+
+    // Xóa hoặc chuyển nhượng chậu cây (BUG-02)
+    function deleteOrArchivePlant() {
+      const plant = userPlants.find(p => p.id === currentDetailPlantId);
+      if (!plant) return;
+      const name = plant.name;
+      userPlants = userPlants.filter(p => p.id !== currentDetailPlantId);
+      saveState();
+      closePlantDetailModal();
+      renderGardenGrid();
+      renderWateringTasks();
+      showToast(`Đã xóa chậu cây "${name}" khỏi vườn!`);
+      logAPI(`[PLANT DELETE] US-024: Đã lưu trữ/xóa cây #${currentDetailPlantId}`);
     }
 
     function addPlantTimelineEntry() {
@@ -1471,7 +1714,7 @@
       const type = document.getElementById('add-plant-type').value;
 
       if (!name) {
-        alert("Vui lòng nhập tên chậu cây!");
+        showToast("Vui lòng nhập tên chậu cây!");
         return;
       }
 
@@ -1489,22 +1732,31 @@
         health: "Mới thêm • Khỏe mạnh",
         healthClass: "healthy",
         image: img,
+        moisture: 30,
+        waterReq: "400ml",
+        isWatered: false,
+        isPostponed: false,
         timeline: [`${new Date().toLocaleDateString('vi-VN')}: Thêm mới chậu cây vào vườn.`]
       });
 
       saveState();
       renderGardenGrid();
+      renderWateringTasks();
       closeNewPlantModal();
+      document.getElementById('add-plant-name').value = "";
       showToast(`Đã thêm chậu ${name} vào vườn thành công!`);
       logAPI(`[PLANT] US-019: Tạo mới chậu cây #${newId} - ${name}`);
     }
 
-    // ================= TỪ ĐIỂN BÁCH KHOA 25+ BỆNH (US-082) =================
+    // ================= TỪ ĐIỂN BÁCH KHOA 25+ BỆNH (US-082, BUG-05) =================
     let currentCategory = 'Tất cả';
+    let currentSelectedEncyclopediaDisease = null;
+
     function renderEncyclopedia(list) {
       const container = document.getElementById('encyclopedia-container');
+      if (!container) return;
       container.innerHTML = list.map(item => `
-        <div class="botanical-card" style="padding: 10px 12px; margin-bottom: 8px;">
+        <div class="botanical-card" style="padding: 10px 12px; margin-bottom: 8px; cursor: pointer; transition: all 0.2s ease;" onclick="openDiseaseDetailModal('${item.id}')">
           <div style="display: flex; justify-content: space-between; align-items: center;">
             <div style="font-weight: 800; font-size: 13px; color: var(--forest-dark);">${item.name}</div>
             <span class="location-pill">${item.cat}</span>
@@ -1532,7 +1784,37 @@
       renderEncyclopedia(filtered);
     }
 
-    // ================= LƯU BỆNH ÁN, CHIA SẺ & BÁO KẾT QUẢ SAI =================
+    function openDiseaseDetailModal(id) {
+      const item = ENCYCLOPEDIA_DATA.find(e => e.id === id);
+      if (!item) return;
+      currentSelectedEncyclopediaDisease = item;
+      document.getElementById('modal-disease-title').innerText = item.name;
+      document.getElementById('modal-disease-sci').innerText = item.sci;
+      document.getElementById('modal-disease-plants').innerText = item.plant;
+      document.getElementById('modal-disease-symptoms').innerText = item.symptoms || "Các vết đốm biến dạng màu sắc, làm suy yếu khả năng quang hợp.";
+      document.getElementById('modal-disease-protocol').innerText = item.remedy;
+      document.getElementById('disease-detail-modal').classList.add('open');
+      logAPI(`[ENCYCLOPEDIA] Mở chi tiết bệnh: ${item.name}`);
+    }
+
+    function closeDiseaseDetailModal() {
+      document.getElementById('disease-detail-modal').classList.remove('open');
+    }
+
+    function applyDiseaseFromEncyclopedia() {
+      if (!currentSelectedEncyclopediaDisease) return;
+      const d = currentSelectedEncyclopediaDisease;
+      document.getElementById('treatment-for-disease').innerText = d.name;
+      document.getElementById('step-1-content').innerHTML = `• Cách ly cây bệnh, cắt tỉa cành lá hỏng bằng kéo khử trùng.`;
+      document.getElementById('step-2-content').innerHTML = `• ${d.remedy}`;
+      document.getElementById('step-3-content').innerHTML = `• Chế phẩm sinh học an toàn cho thú cưng và môi trường ban công.`;
+      closeDiseaseDetailModal();
+      goToTab('tab-treatment');
+      showToast(`Đã áp dụng phác đồ Safe-First cho: ${d.name}`);
+      logAPI(`[TREATMENT] Áp dụng phác đồ cho bệnh ${d.name} từ Bách khoa toàn thư.`);
+    }
+
+    // ================= LƯU BỆNH ÁN, CHIA SẺ & BÁO KẾT QUẢ SAI (BUG-06, BUG-07) =================
     function saveDiagnosisToPlantRecord() {
       const disease = DISEASE_SAMPLES[selectedDiseaseIdx];
       if (userPlants[0]) {
@@ -1541,21 +1823,50 @@
         userPlants[0].healthClass = "danger";
         saveState();
         renderGardenGrid();
+        renderWateringTasks();
       }
       showToast("Đã lưu kết quả quét bệnh vào Hồ Sơ Bệnh Án!");
       logAPI("[MEDICAL] US-055: Lưu kết quả chẩn đoán vào hồ sơ bệnh án cây #1.");
     }
 
+    // Modal chia sẻ hội nhóm (BUG-06)
     function shareDiagnosisModal() {
-      const link = window.location.href;
-      navigator.clipboard?.writeText(link);
-      showToast("Đã sao chép liên kết bệnh án để chia sẻ cộng đồng!");
-      logAPI("[SHARE] US-056: Chia sẻ kết quả quét bệnh lên mạng xã hội.");
+      document.getElementById('share-diagnosis-modal').classList.add('open');
     }
 
+    function closeShareModal() {
+      document.getElementById('share-diagnosis-modal').classList.remove('open');
+    }
+
+    function confirmShareGroup(groupName) {
+      closeShareModal();
+      showToast(`Đã chia sẻ bệnh án lên "${groupName}" thành công!`);
+      logAPI(`[SHARE] US-056: Đã đăng bệnh án lên ${groupName}`);
+    }
+
+    function copyDiagnosisLink() {
+      navigator.clipboard?.writeText(window.location.href);
+      closeShareModal();
+      showToast("Đã sao chép liên kết bệnh án kèm mã QR vào Clipboard!");
+      logAPI("[SHARE] US-056: Sao chép liên kết chia sẻ.");
+    }
+
+    // Modal báo kết quả sai / Active learning (BUG-07)
     function feedbackWrongDiagnosis() {
-      showToast("Cảm ơn bạn! Mẫu ảnh đã được gửi về kho Active Learning để tái huấn luyện!");
-      logAPI("[ACTIVE LEARNING] US-057: Tiếp nhận phản hồi sai -> Gửi về Data Lake.");
+      document.getElementById('feedback-diagnosis-modal').classList.add('open');
+    }
+
+    function closeFeedbackModal() {
+      document.getElementById('feedback-diagnosis-modal').classList.remove('open');
+    }
+
+    function submitDiagnosisFeedback() {
+      const actual = document.getElementById('feedback-actual-disease').value;
+      const note = document.getElementById('feedback-comment').value.trim();
+      closeFeedbackModal();
+      document.getElementById('feedback-comment').value = "";
+      showToast("Cảm ơn bạn! Mẫu ảnh & chẩn đoán thực tế đã được chuyển vào Data Lake AI!");
+      logAPI(`[ACTIVE LEARNING] US-057: Ghi nhận chẩn đoán thực tế "${actual}" | Note: "${note}"`);
     }
 
     // ================= NHẮC XỊT 3 NGÀY & ĐÁNH GIÁ 7 NGÀY (US-080, US-081) =================
@@ -1611,7 +1922,7 @@
       logAPI("[VIP] US-085, US-092: Kích hoạt VIP thành công -> Cấp e-receipt.");
     }
 
-    // ================= ĐẶT LỊCH CHUYÊN GIA (US-087, US-088) =================
+    // ================= ĐẶT LỊCH CHUYÊN GIA & PHÒNG GỌI VIDEO CALL 1-1 (US-087, BUG-01) =================
     function openExpertBookingModal() {
       document.getElementById('expert-modal').classList.add('open');
     }
@@ -1628,12 +1939,72 @@
 
     function confirmExpertBooking() {
       closeExpertModal();
-      const meetUrl = `https://meet.urbanplants.vn/room-exp-${Date.now().toString(36)}`;
-      showToast(`Đặt lịch thành công lúc ${selectedSlotTime}! Đang mở phòng gọi...`);
-      logAPI(`[EXPERT] US-087, US-088: Đặt lịch chuyên gia 1-1 lúc ${selectedSlotTime} -> Room: ${meetUrl}`);
-      setTimeout(() => {
-        window.open(meetUrl, '_blank');
+      document.getElementById('expert-videocall-modal').classList.add('open');
+      showToast(`Đã kết nối với phòng Video Call của Kỹ sư Trần Anh Dũng!`);
+      logAPI(`[EXPERT] US-087, US-088: Khởi tạo phiên Video Call 1-1 trực tiếp.`);
+
+      // Đếm ngược 15 phút
+      let secondsRemaining = 15 * 60;
+      if (activeCallTimer) clearInterval(activeCallTimer);
+      activeCallTimer = setInterval(() => {
+        secondsRemaining--;
+        if (secondsRemaining <= 0) {
+          closeExpertVideoCall();
+          return;
+        }
+        const m = Math.floor(secondsRemaining / 60);
+        const s = secondsRemaining % 60;
+        const timerEl = document.getElementById('call-timer');
+        if (timerEl) {
+          timerEl.innerText = `⏱️ ${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+        }
       }, 1000);
+    }
+
+    function closeExpertVideoCall() {
+      if (activeCallTimer) clearInterval(activeCallTimer);
+      document.getElementById('expert-videocall-modal').classList.remove('open');
+      showToast("Đã hoàn tất phiên tư vấn 1-1 với Kỹ sư Nông nghiệp!");
+      logAPI("[EXPERT] Kết thúc cuộc gọi tư vấn -> Ghi nhận hoàn thành phiên.");
+    }
+
+    // ================= CHỈNH SỬA HỒ SƠ NGƯỜI DÙNG (US-010, BUG-08) =================
+    function openProfileEditModal() {
+      document.getElementById('edit-profile-name').value = userProfile.name;
+      document.getElementById('edit-profile-garden').value = userProfile.garden;
+      document.getElementById('edit-profile-sun').value = userProfile.sun;
+      document.getElementById('profile-edit-modal').classList.add('open');
+    }
+
+    function closeProfileEditModal() {
+      document.getElementById('profile-edit-modal').classList.remove('open');
+    }
+
+    function saveUserProfile() {
+      const name = document.getElementById('edit-profile-name').value.trim();
+      const garden = document.getElementById('edit-profile-garden').value.trim();
+      const sun = document.getElementById('edit-profile-sun').value;
+
+      if (!name) {
+        showToast("Vui lòng nhập tên người làm vườn!");
+        return;
+      }
+
+      userProfile = { name, garden, sun };
+      saveState();
+      loadUserProfileUI();
+      closeProfileEditModal();
+      showToast("Đã cập nhật hồ sơ người làm vườn thành công!");
+      logAPI(`[PROFILE] US-010: Cập nhật hồ sơ ${name} - ${garden}`);
+    }
+
+    function loadUserProfileUI() {
+      const nameEl = document.getElementById('profile-user-name');
+      const gardenEl = document.getElementById('profile-garden-name');
+      const sunEl = document.getElementById('profile-sun-dir');
+      if (nameEl) nameEl.innerText = userProfile.name;
+      if (gardenEl) gardenEl.innerText = userProfile.garden;
+      if (sunEl) sunEl.innerText = userProfile.sun;
     }
 
     // ================= ADMIN CMS & XUẤT CSV THẬT (US-093 - US-098) =================
@@ -1671,14 +2042,19 @@
     // ================= KHỞI CHẠY LẦN ĐẦU =================
     window.addEventListener('DOMContentLoaded', () => {
       renderGardenGrid();
+      renderWateringTasks();
       renderDiseaseSamples();
       renderEncyclopedia(ENCYCLOPEDIA_DATA);
+      loadUserProfileUI();
 
       // Đồng hồ sống
       setInterval(() => {
         const now = new Date();
-        document.getElementById('live-clock').innerText = 
-          `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+        const clockEl = document.getElementById('live-clock');
+        if (clockEl) {
+          clockEl.innerText = 
+            `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+        }
       }, 1000);
 
       // Sóng âm visualizer
