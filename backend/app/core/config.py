@@ -17,6 +17,16 @@ class Settings(BaseSettings):
     )
     REDIS_URL: str = os.getenv("REDIS_URL", "redis://localhost:6379/0")
 
+    @property
+    def ASYNC_DATABASE_URL(self) -> str:
+        """Tự động chuẩn hóa URL kết nối cho SQLAlchemy Async (tương thích 100% với Railway PostgreSQL)"""
+        url = self.DATABASE_URL
+        if url.startswith("postgres://"):
+            url = url.replace("postgres://", "postgresql+asyncpg://", 1)
+        elif url.startswith("postgresql://") and not url.startswith("postgresql+asyncpg://"):
+            url = url.replace("postgresql://", "postgresql+asyncpg://", 1)
+        return url
+
     BACKEND_CORS_ORIGINS: List[str] = ["*"]
 
     class Config:

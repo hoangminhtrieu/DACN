@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:urban_plants/core/theme.dart';
+import 'package:urban_plants/core/app_state.dart';
+import 'package:urban_plants/features/diagnosis/screens/ai_camera_scanner_screen.dart';
 
 class SafeFirstProtocolScreen extends StatefulWidget {
   final Map<String, dynamic>? protocolData;
@@ -17,81 +21,248 @@ class SafeFirstProtocolScreen extends StatefulWidget {
 }
 
 class _SafeFirstProtocolScreenState extends State<SafeFirstProtocolScreen> {
-  bool _reminderScheduled = false;
-  bool _auditScheduled = false;
+  // Danh mục cửa hàng vật tư đô thị gần nhất (US-084)
+  final List<Map<String, dynamic>> _nearbyStores = [
+    {
+      'name': 'Vật Tư Nông Nghiệp Đô Thị Sài Gòn',
+      'distance': '0.8 km',
+      'address': '124 Điện Biên Phủ, Phường Đa Kao, Quận 1, TP.HCM',
+      'phone': '0908 123 456',
+    },
+    {
+      'name': 'Cửa Hàng Sinh Học Ban Công Xanh',
+      'distance': '1.5 km',
+      'address': '45 Nguyễn Hữu Cảnh, Bình Thạnh, TP.HCM',
+      'phone': '0933 888 999',
+    },
+    {
+      'name': 'Vườn Ươm Cây Cảnh & Vật Tư Hữu Cơ',
+      'distance': '2.4 km',
+      'address': '210 Nguyễn Thị Minh Khai, Quận 3, TP.HCM',
+      'phone': '0912 345 678',
+    },
+  ];
 
-  Map<String, dynamic> _resolvedData() {
-    if (widget.protocolData != null) return widget.protocolData!;
-    final v = widget.verificationResult ?? {};
-    final p = widget.protocol ?? {};
-    return {
-      'primary_diagnosis': v['primary_disease'] ?? p['disease_name'] ?? 'Bệnh cây trồng đô thị',
-      'recalculated_confidence': v['recalculated_confidence'] ?? 0.85,
-      'is_fungal_confirmed': v['is_fungal_confirmed'] ?? false,
-      'is_pest_infestation': v['is_pest_infestation'] ?? false,
-      'is_nutrient_deficiency': v['is_nutrient_deficiency'] ?? false,
-      'contagion_risk': v['contagion_risk'] ?? 'trung bình',
-      'differential_notes': v['differential_notes'] ?? 'Đã xác thực chéo triệu chứng.',
-      'safe_first_steps': p['steps'] ?? {
-        'step1_isolation_pruning': {
-          'title': 'Cắt Tỉa Cơ Học & Cách Ly',
-          'actions': 'Cắt bỏ 100% lá bệnh, cách ly chậu 1.5m.',
-          'tool_disinfection': 'Lau kéo bằng cồn 70 độ y tế.',
-          'waste_disposal': 'Buộc kín túi rác, không ủ phân hữu cơ.',
-        },
-        'step2_organic_home_remedy': {
-          'title': 'Giải Pháp Hữu Cơ / Nhà Làm',
-          'recipe_name': 'Dung dịch Dầu Neem & Nước rửa chén sinh học',
-          'mixing_ratio': '5ml Neem + 2ml nước rửa chén / 1 Lít nước ấm',
-          'spray_instructions': 'Phun ướt đều 2 mặt lá lúc 17h30 chiều mát.',
-          'frequency': 'Phun 3 ngày/lần trong vòng 9 ngày.',
-        },
-        'step3_safe_bio_actives': {
-          'title': 'Hoạt Chất Sinh Học Đặc Trị',
-          'recommended_bio_agents': 'Bacillus subtilis, Trichoderma harzianum',
-          'action_mechanism': 'Đối kháng vi nấm và kích kháng tự nhiên.',
-          'shelf_life_note': 'Bảo quản nơi thoáng mát, tránh ánh nắng trực tiếp.',
-        },
-      },
-      'pet_child_safety_notes': p['pet_child_safety_notes'] ?? {
-        'dogs_cats_safe': true,
-        'child_safe': true,
-        'ventilation_advice': 'Đảm bảo ban công thông thoáng gió khi phun.',
-      },
-    };
+  // Danh mục vật tư sinh học chuẩn Safe-First (US-083)
+  final List<Map<String, dynamic>> _bioSupplies = [
+    {
+      'name': 'Dầu Neem Nguyên Chất Ép Lạnh (Chai 100ml)',
+      'brand': 'Docneem Organic',
+      'price': '85.000 đ',
+      'active': 'Azadirachtin tự nhiên',
+      'target': 'Đặc trị nhện đỏ, bọ trĩ, phấn trắng',
+    },
+    {
+      'name': 'Chế Phẩm Vi Sinh Bacillus Subtilis (Hũ 200g)',
+      'brand': 'Bio-Plant Vietnam',
+      'price': '65.000 đ',
+      'active': 'Bào tử vi khuẩn Bacillus subtilis',
+      'target': 'Đối kháng vi nấm đốm lá, thán thư, phấn trắng',
+    },
+    {
+      'name': 'Nấm Đối Kháng Trichoderma Harzianum (Gói 500g)',
+      'brand': 'Đại Học Nông Lâm',
+      'price': '55.000 đ',
+      'active': 'Trichoderma harzianum 10^9 CFU/g',
+      'target': 'Bảo vệ bộ rễ, phòng chống thối rễ, lở cổ rễ',
+    },
+  ];
+
+  void _showNearbyStoresModal() {
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (ctx) => Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Row(
+              children: [
+                Icon(Icons.storefront, color: AppTheme.primaryGreen, size: 24),
+                SizedBox(width: 8),
+                Text(
+                  'Cửa Hàng Vật Tư Nông Nghiệp Gần Nhất (GPS)',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: AppTheme.neutralDark),
+                ),
+              ],
+            ),
+            const SizedBox(height: 14),
+            ..._nearbyStores.map((store) => Card(
+                  margin: const EdgeInsets.only(bottom: 10),
+                  child: ListTile(
+                    leading: const CircleAvatar(
+                      backgroundColor: AppTheme.mintSurface,
+                      child: Icon(Icons.location_on, color: AppTheme.primaryGreen),
+                    ),
+                    title: Text(store['name'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
+                    subtitle: Text('${store['address']}\nSĐT: ${store['phone']}', style: const TextStyle(fontSize: 11)),
+                    trailing: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      decoration: BoxDecoration(color: Colors.green.shade50, borderRadius: BorderRadius.circular(10)),
+                      child: Text(store['distance'], style: const TextStyle(color: AppTheme.primaryDark, fontWeight: FontWeight.bold, fontSize: 11)),
+                    ),
+                  ),
+                )),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _showBioSuppliesModal() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (ctx) => Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Row(
+              children: [
+                Icon(Icons.eco, color: AppTheme.primaryGreen, size: 24),
+                SizedBox(width: 8),
+                Text(
+                  'Vật Tư Sinh Học Khuyến Nghị (Safe-First)',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: AppTheme.neutralDark),
+                ),
+              ],
+            ),
+            const SizedBox(height: 14),
+            ..._bioSupplies.map((item) => Card(
+                  margin: const EdgeInsets.only(bottom: 10),
+                  child: ListTile(
+                    leading: const CircleAvatar(
+                      backgroundColor: AppTheme.mintSurface,
+                      child: Icon(Icons.medical_services, color: AppTheme.primaryGreen),
+                    ),
+                    title: Text(item['name'], style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
+                    subtitle: Text('Hoạt chất: ${item['active']}\nCông dụng: ${item['target']}', style: const TextStyle(fontSize: 11)),
+                    trailing: Text(item['price'], style: const TextStyle(color: Colors.deepOrange, fontWeight: FontWeight.bold, fontSize: 13)),
+                  ),
+                )),
+            const SizedBox(height: 10),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(backgroundColor: AppTheme.primaryGreen),
+                onPressed: () {
+                  Navigator.pop(ctx);
+                  _showNearbyStoresModal();
+                },
+                icon: const Icon(Icons.store),
+                label: const Text('Xem danh sách cửa hàng gần nhất để mua ngay'),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    final data = _resolvedData();
-    final primary = data['primary_diagnosis'] ?? 'Bệnh cây trồng đô thị';
-    final isFungal = data['is_fungal_confirmed'] ?? false;
-    final isPest = data['is_pest_infestation'] ?? false;
-    final isDeficiency = data['is_nutrient_deficiency'] ?? false;
-    final contagionRisk = data['contagion_risk'] ?? 'trung bình';
-    final confidence = ((data['recalculated_confidence'] ?? 0.85) * 100).toStringAsFixed(1);
-    final diffNotes = data['differential_notes'] ?? 'Đã hoàn tất kiểm chứng chéo triệu chứng vật lý.';
+    final appState = context.watch<AppState>();
 
-    final steps = data['safe_first_steps'] as Map<String, dynamic>? ?? {};
-    final step1 = steps['step1_isolation_pruning'] as Map<String, dynamic>? ?? {};
-    final step2 = steps['step2_organic_home_remedy'] as Map<String, dynamic>? ?? {};
-    final step3 = steps['step3_safe_bio_actives'] as Map<String, dynamic>? ?? {};
-    final safety = data['pet_child_safety_notes'] as Map<String, dynamic>? ?? {};
+    // RÀNG BUỘC ĐIỀU KIỆN TIÊN QUYẾT (PRECONDITION CONSTRAINT - US-075)
+    // Nếu người dùng chưa quét ảnh hoặc chưa chọn chậu cây nào đang bệnh, hiển thị thông báo yêu cầu
+    if (!appState.hasActiveDiagnosis && widget.verificationResult == null && widget.protocol == null) {
+      return Scaffold(
+        backgroundColor: const Color(0xFFF8FAF9),
+        appBar: AppBar(
+          title: const Text('Phác Đồ Safe-First 3 Bước'),
+          backgroundColor: AppTheme.primaryGreen,
+          foregroundColor: Colors.white,
+        ),
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(28.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(24),
+                  decoration: const BoxDecoration(
+                    color: AppTheme.mintSurface,
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Icon(Icons.medical_services_outlined, size: 72, color: AppTheme.primaryGreen),
+                ),
+                const SizedBox(height: 24),
+                const Text(
+                  'Chưa có ca bệnh nào đang chọn',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: AppTheme.neutralDark),
+                ),
+                const SizedBox(height: 10),
+                const Text(
+                  'Để tạo phác đồ điều trị 3 bước Safe-First chuẩn xác, vui lòng chụp/tải ảnh lá cây qua Camera AI hoặc chọn một chậu cây đang bệnh trong Vườn của bạn.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 13, height: 1.4, color: AppTheme.neutralMuted),
+                ),
+                const SizedBox(height: 24),
+                ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppTheme.primaryGreen,
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => const AICameraScannerScreen()),
+                    );
+                  },
+                  icon: const Icon(Icons.camera_alt),
+                  label: const Text('Mở Camera Quét Lá Cây Bệnh', style: TextStyle(fontWeight: FontWeight.bold)),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    }
+
+    // Dữ liệu ca bệnh đang điều trị
+    final String plantName = appState.activeDiagnosedPlantName;
+    final String diseaseName = appState.activeDiseaseName;
+    final String diseaseSci = appState.activeDiseaseSci;
+    final double confidence = appState.activeConfidence;
+    final double volume = appState.sprayBottleVolumeLiters;
+
+    // Tính toán công thức pha chế tự động theo thể tích bình xịt (US-076)
+    final double neemMl = volume * 5.0; // 5ml / 1 Lít
+    final double soapMl = volume * 2.0; // 2ml / 1 Lít
+    final double sodaGram = volume * 5.0; // 5g / 1 Lít
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF7FBF8),
+      backgroundColor: const Color(0xFFF8FAF9),
       appBar: AppBar(
         title: const Text('Phác Đồ Safe-First 3 Bước'),
-        backgroundColor: const Color(0xFF1B5E20),
+        backgroundColor: AppTheme.primaryGreen,
         foregroundColor: Colors.white,
-        elevation: 0,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.storefront),
+            tooltip: 'Cửa hàng vật tư gần nhất (US-084)',
+            onPressed: _showNearbyStoresModal,
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // Header: Kết quả sau phân biệt chéo
+            // Header kết quả chẩn đoán
             Card(
               elevation: 2,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
@@ -102,154 +273,57 @@ class _SafeFirstProtocolScreenState extends State<SafeFirstProtocolScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Icon(Icons.verified, color: Color(0xFF2E7D32), size: 28),
-                        const SizedBox(width: 8),
                         Expanded(
-                          child: Text(
-                            primary,
-                            style: const TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xFF1E293B),
-                            ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                plantName,
+                                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: AppTheme.neutralDark),
+                              ),
+                              const SizedBox(height: 2),
+                              Text(
+                                diseaseName,
+                                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.deepOrange),
+                              ),
+                              Text(
+                                diseaseSci,
+                                style: const TextStyle(fontStyle: FontStyle.italic, fontSize: 12, color: AppTheme.neutralMuted),
+                              ),
+                            ],
                           ),
                         ),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                           decoration: BoxDecoration(
-                            color: const Color(0xFFE8F5E9),
-                            borderRadius: BorderRadius.circular(20),
-                            border: Border.all(color: const Color(0xFF81C784)),
+                            color: AppTheme.mintSurface,
+                            borderRadius: BorderRadius.circular(12),
                           ),
                           child: Text(
-                            'Độ tin cậy: $confidence%',
-                            style: const TextStyle(
-                              color: Color(0xFF1B5E20),
-                              fontWeight: FontWeight.bold,
-                              fontSize: 13,
-                            ),
+                            '${(confidence * 100).toStringAsFixed(1)}% AI Tin Cậy',
+                            style: const TextStyle(color: AppTheme.primaryDark, fontWeight: FontWeight.bold, fontSize: 12),
                           ),
                         ),
                       ],
                     ),
-                    const SizedBox(height: 12),
-                    Wrap(
-                      spacing: 8,
-                      runSpacing: 6,
-                      children: [
-                        if (isFungal)
-                          _buildBadge(Icons.bubble_chart, 'Nhiễm Nấm Bào Tử', Colors.orange),
-                        if (isPest)
-                          _buildBadge(Icons.pest_control, 'Côn Trùng / Nhện Đỏ', Colors.red),
-                        if (isDeficiency)
-                          _buildBadge(Icons.eco, 'Thiếu Hụt Vi Lượng Fe/Mg', Colors.amber[800]!),
-                        _buildBadge(Icons.warning_amber_rounded, 'Nguy cơ lây: $contagionRisk', Colors.purple),
-                      ],
-                    ),
                     const SizedBox(height: 10),
-                    Text(
-                      diffNotes,
-                      style: const TextStyle(fontSize: 13, color: Color(0xFF475569), fontStyle: FontStyle.italic),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(height: 16),
-
-            // Banner chuẩn Urban Plant Trust Safe-First
-            Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: const Color(0xFFE8F5E9),
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: const Color(0xFFA5D6A7)),
-              ),
-              child: const Row(
-                children: [
-                  Icon(Icons.shield_outlined, color: Color(0xFF2E7D32), size: 24),
-                  SizedBox(width: 10),
-                  Expanded(
-                    child: Text(
-                      'Chuẩn An Toàn Safe-First: Ưu tiên cô lập cơ học và chế phẩm hữu cơ tự chế tại nhà trước khi dùng vi sinh, tuyệt đối không hóa chất độc hại.',
-                      style: TextStyle(fontSize: 12, color: Color(0xFF1B5E20), height: 1.3),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 20),
-
-            // Bước 1: Cách ly & Cắt tỉa
-            _buildStepCard(
-              stepNumber: '1',
-              title: step1['title'] ?? 'Cắt Tỉa Cơ Học & Cách Ly',
-              color: const Color(0xFFE65100),
-              icon: Icons.content_cut,
-              content: [
-                _buildBullet('Hành động:', step1['actions'] ?? 'Cắt bỏ 100% lá bệnh, cách ly chậu 1.5m.'),
-                _buildBullet('Khử trùng:', step1['tool_disinfection'] ?? 'Lau kéo bằng cồn 70 độ cồn y tế.'),
-                _buildBullet('Tiêu hủy:', step1['waste_disposal'] ?? 'Buộc kín túi rác, không ủ phân hữu cơ.'),
-              ],
-            ),
-            const SizedBox(height: 14),
-
-            // Bước 2: Hữu cơ nhà làm
-            _buildStepCard(
-              stepNumber: '2',
-              title: step2['title'] ?? 'Giải Pháp Hữu Cơ / Nhà Làm',
-              color: const Color(0xFF2E7D32),
-              icon: Icons.eco,
-              content: [
-                _buildBullet('Chế phẩm:', step2['recipe_name'] ?? 'Dung dịch Dầu Neem & Nước rửa chén sinh học'),
-                _buildBullet('Tỷ lệ pha:', step2['mixing_ratio'] ?? '5ml Neem + 2ml nước rửa chén / 1 Lít nước ấm'),
-                _buildBullet('Cách phun:', step2['spray_instructions'] ?? 'Phun ướt đều 2 mặt lá lúc 17h30 chiều mát.'),
-                _buildBullet('Tần suất:', step2['frequency'] ?? 'Phun 3 ngày/lần trong vòng 9 ngày.'),
-              ],
-            ),
-            const SizedBox(height: 14),
-
-            // Bước 3: Hoạt chất sinh học an toàn
-            _buildStepCard(
-              stepNumber: '3',
-              title: step3['title'] ?? 'Hoạt Chất Sinh Học Đặc Trị',
-              color: const Color(0xFF0277BD),
-              icon: Icons.biotech,
-              content: [
-                _buildBullet('Hoạt chất an toàn:', step3['recommended_bio_agents'] ?? 'Bacillus subtilis, Trichoderma harzianum'),
-                _buildBullet('Cơ chế:', step3['action_mechanism'] ?? 'Đối kháng vi nấm và kích kháng tự nhiên.'),
-                _buildBullet('Lưu ý bảo quản:', step3['shelf_life_note'] ?? 'Bảo quản nơi thoáng mát, tránh ánh nắng trực tiếp.'),
-              ],
-            ),
-            const SizedBox(height: 16),
-
-            // Cảnh báo an toàn thú cưng & trẻ em (US-079)
-            Card(
-              elevation: 1,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-              color: const Color(0xFFFFF8E1),
-              child: Padding(
-                padding: const EdgeInsets.all(14),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Icon(Icons.pets, color: Color(0xFFF57F17), size: 26),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                    Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: Colors.blue.shade50,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: const Row(
                         children: [
-                          const Text(
-                            'An Toàn Ban Công & Thú Cưng / Trẻ Nhỏ',
-                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Color(0xFFE65100)),
-                          ),
-                          const SizedBox(height: 4),
-                          Text(
-                            'Chó mèo: ${safety['dogs_cats_safe'] == true ? 'An toàn khi dung dịch đã khô ráo (sau 1-2h).' : 'Cần để xa tầm với.'}\n'
-                            'Trẻ nhỏ: ${safety['child_safe'] == true ? 'Không độc hại da, tránh uống phải.' : 'Cách ly trong 24h đầu.'}\n'
-                            'Lưu ý: ${safety['ventilation_advice'] ?? 'Đảm bảo ban công thông thoáng gió.'}',
-                            style: const TextStyle(fontSize: 12, color: Color(0xFF4E342E), height: 1.4),
+                          Icon(Icons.verified_user, color: Colors.blue, size: 16),
+                          SizedBox(width: 6),
+                          Expanded(
+                            child: Text(
+                              'Nguyên tắc Safe-First: Ưu tiên cách ly & hữu cơ an toàn cho trẻ nhỏ và thú cưng.',
+                              style: TextStyle(fontSize: 11, color: Colors.blue, fontWeight: FontWeight.w500),
+                            ),
                           ),
                         ],
                       ),
@@ -258,139 +332,376 @@ class _SafeFirstProtocolScreenState extends State<SafeFirstProtocolScreen> {
                 ),
               ),
             ),
+            const SizedBox(height: 16),
+
+            // ================= BƯỚC 1: CÁCH LY & CẮT TỈA CƠ HỌC =================
+            Card(
+              elevation: 2,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Row(
+                          children: [
+                            CircleAvatar(
+                              radius: 14,
+                              backgroundColor: AppTheme.primaryGreen,
+                              child: Text('1', style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.bold)),
+                            ),
+                            SizedBox(width: 8),
+                            Text(
+                              'Bước 1: Cách Ly & Cắt Tỉa Cơ Học',
+                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: AppTheme.neutralDark),
+                            ),
+                          ],
+                        ),
+                        if (appState.step1Completed)
+                          const Icon(Icons.check_circle, color: AppTheme.primaryGreen, size: 22)
+                        else
+                          const Icon(Icons.lock_open, color: Colors.orange, size: 20),
+                      ],
+                    ),
+                    const SizedBox(height: 10),
+                    const Text('• Dùng kéo sạch cắt bỏ 100% các lá và đọt có vết đốm phấn bệnh.', style: TextStyle(fontSize: 12, height: 1.3)),
+                    const Text('• Khử trùng lưỡi kéo bằng cồn 70 độ trước và sau khi thao tác.', style: TextStyle(fontSize: 12, height: 1.3)),
+                    const Text('• Di chuyển chậu cách xa các cây khác tối thiểu 1.5 mét.', style: TextStyle(fontSize: 12, height: 1.3)),
+                    const SizedBox(height: 12),
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton.icon(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: appState.step1Completed ? Colors.grey.shade400 : AppTheme.primaryGreen,
+                          foregroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                        ),
+                        onPressed: appState.step1Completed
+                            ? null
+                            : () {
+                                appState.completeStep1();
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text('✓ Đã xác nhận hoàn thành Bước 1! Mở khóa Bước 2.'),
+                                    backgroundColor: AppTheme.primaryGreen,
+                                  ),
+                                );
+                              },
+                        icon: Icon(appState.step1Completed ? Icons.check : Icons.cut),
+                        label: Text(appState.step1Completed ? 'Đã hoàn thành Bước 1' : 'Xác nhận Đã Cách Ly & Cắt Tỉa'),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 14),
+
+            // ================= BƯỚC 2: GIẢI PHÁP HỮU CƠ / NHÀ LÀM =================
+            Card(
+              elevation: 2,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+              color: appState.step1Completed ? Colors.white : Colors.grey.shade100,
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            CircleAvatar(
+                              radius: 14,
+                              backgroundColor: appState.step1Completed ? Colors.amber.shade700 : Colors.grey,
+                              child: const Text('2', style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.bold)),
+                            ),
+                            const SizedBox(width: 8),
+                            const Text(
+                              'Bước 2: Giải Pháp Hữu Cơ / Nhà Làm',
+                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: AppTheme.neutralDark),
+                            ),
+                          ],
+                        ),
+                        if (!appState.step1Completed)
+                          const Row(
+                            children: [
+                              Icon(Icons.lock, size: 16, color: Colors.grey),
+                              SizedBox(width: 4),
+                              Text('Cần xong B1', style: TextStyle(fontSize: 11, color: Colors.grey)),
+                            ],
+                          )
+                        else if (appState.step2Completed)
+                          const Icon(Icons.check_circle, color: AppTheme.primaryGreen, size: 22),
+                      ],
+                    ),
+                    const SizedBox(height: 10),
+
+                    if (appState.step1Completed) ...[
+                      // Bộ tính toán công thức pha chế tự động theo thể tích bình xịt
+                      Container(
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: Colors.amber.shade50,
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: Colors.amber.shade300),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Text(
+                                  '🧪 Thể tích bình xịt của bạn:',
+                                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+                                ),
+                                DropdownButton<double>(
+                                  value: appState.sprayBottleVolumeLiters,
+                                  isDense: true,
+                                  items: const [
+                                    DropdownMenuItem(value: 0.5, child: Text('0.5 Lít (Bình nhỏ)')),
+                                    DropdownMenuItem(value: 1.0, child: Text('1.0 Lít (Chuẩn)')),
+                                    DropdownMenuItem(value: 2.0, child: Text('2.0 Lít (Bình lớn)')),
+                                  ],
+                                  onChanged: (val) {
+                                    if (val != null) appState.setSprayVolume(val);
+                                  },
+                                ),
+                              ],
+                            ),
+                            const Divider(height: 14),
+                            Text('• Dầu Neem nguyên chất: ${neemMl.toStringAsFixed(1)} ml', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.brown)),
+                            Text('• Nước rửa chén sinh học (nhũ hóa): ${soapMl.toStringAsFixed(1)} ml', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.blueGrey)),
+                            Text('• Baking Soda kháng nấm: ${sodaGram.toStringAsFixed(1)} gram', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.green)),
+                            const SizedBox(height: 6),
+                            const Text(
+                              '💡 Hòa tan trong nước ấm 40°C, lắc đều và phun ướt 2 mặt lá lúc 17h30 chiều mát.',
+                              style: TextStyle(fontSize: 11, fontStyle: FontStyle.italic, color: Color(0xFF64748B)),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+
+                      // Nút Đặt lịch nhắc xịt sau 3-5 ngày (US-078)
+                      SizedBox(
+                        width: double.infinity,
+                        child: OutlinedButton.icon(
+                          style: OutlinedButton.styleFrom(
+                            side: const BorderSide(color: AppTheme.primaryGreen),
+                            padding: const EdgeInsets.symmetric(vertical: 10),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                          ),
+                          onPressed: appState.hasScheduledSprayReminder
+                              ? null
+                              : () {
+                                  appState.setScheduledSprayReminder(true);
+                                  appState.addSprayReminderSchedule(diseaseName, 3);
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text('✓ Đã tự động thêm lịch nhắc xịt thuốc sau 3 ngày vào Trang Chủ!'),
+                                      backgroundColor: AppTheme.primaryGreen,
+                                    ),
+                                  );
+                                },
+                          icon: Icon(
+                            appState.hasScheduledSprayReminder ? Icons.check : Icons.notification_add_outlined,
+                            color: appState.hasScheduledSprayReminder ? Colors.grey : AppTheme.primaryGreen,
+                          ),
+                          label: Text(
+                            appState.hasScheduledSprayReminder ? '✓ Đã đặt lịch nhắc (Hẹn 3 ngày sau)' : 'Đặt Lịch Nhắc Xịt Thuốc Sau 3 Ngày',
+                            style: TextStyle(
+                              color: appState.hasScheduledSprayReminder ? Colors.grey : AppTheme.primaryGreen,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 12,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+
+                      // Nút Xác nhận đã xịt xong Bước 2
+                      SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton.icon(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: appState.step2Completed ? Colors.grey.shade400 : Colors.amber.shade800,
+                            foregroundColor: Colors.white,
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                          ),
+                          onPressed: appState.step2Completed
+                              ? null
+                              : () {
+                                  appState.completeStep2();
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text('✓ Đã hoàn thành xịt dung dịch hữu cơ Bước 2!'),
+                                      backgroundColor: AppTheme.primaryGreen,
+                                    ),
+                                  );
+                                },
+                          icon: Icon(appState.step2Completed ? Icons.check : Icons.science_outlined),
+                          label: Text(appState.step2Completed ? 'Đã hoàn thành Bước 2' : 'Xác nhận Đã Phun Xịt Bước 2'),
+                        ),
+                      ),
+                    ] else ...[
+                      const Text(
+                        'Vui lòng hoàn thành Bước 1 (Cách ly & Cắt tỉa cơ học) để mở khóa công thức pha chế.',
+                        style: TextStyle(fontSize: 12, color: Colors.grey, fontStyle: FontStyle.italic),
+                      ),
+                    ],
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 14),
+
+            // ================= BƯỚC 3: HOẠT CHẤT SINH HỌC ĐẶC TRỊ =================
+            Card(
+              elevation: 2,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+              color: appState.step3Unlocked ? Colors.white : Colors.grey.shade100,
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            CircleAvatar(
+                              radius: 14,
+                              backgroundColor: appState.step3Unlocked ? Colors.purple : Colors.grey,
+                              child: const Text('3', style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.bold)),
+                            ),
+                            const SizedBox(width: 8),
+                            const Text(
+                              'Bước 3: Hoạt Chất Sinh Học Đặc Trị',
+                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: AppTheme.neutralDark),
+                            ),
+                          ],
+                        ),
+                        if (!appState.step3Unlocked)
+                          const Row(
+                            children: [
+                              Icon(Icons.lock, size: 16, color: Colors.grey),
+                              SizedBox(width: 4),
+                              Text('Khóa', style: TextStyle(fontSize: 11, color: Colors.grey)),
+                            ],
+                          )
+                        else
+                          const Icon(Icons.verified, color: Colors.purple, size: 22),
+                      ],
+                    ),
+                    const SizedBox(height: 10),
+
+                    if (appState.step3Unlocked) ...[
+                      const Text('Áp dụng khi bệnh nặng hoặc Bước 2 chưa dứt điểm:', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+                      const SizedBox(height: 4),
+                      const Text('• Bacillus subtilis (Chế phẩm vi sinh đối kháng nấm mốc).', style: TextStyle(fontSize: 12, height: 1.3)),
+                      const Text('• Trichoderma harzianum (Nấm đối kháng bảo vệ gốc rễ).', style: TextStyle(fontSize: 12, height: 1.3)),
+                      const Text('• Copper Hydroxide (Đồng sinh học phổ rộng, tỷ lệ an toàn đô thị).', style: TextStyle(fontSize: 12, height: 1.3)),
+                      const SizedBox(height: 12),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: ElevatedButton.icon(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.purple,
+                                foregroundColor: Colors.white,
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                              ),
+                              onPressed: _showBioSuppliesModal,
+                              icon: const Icon(Icons.shopping_bag_outlined, size: 18),
+                              label: const Text('Mua Vật Tư', style: TextStyle(fontSize: 12)),
+                            ),
+                          ),
+                          const SizedBox(width: 10),
+                          Expanded(
+                            child: OutlinedButton.icon(
+                              style: OutlinedButton.styleFrom(
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                              ),
+                              onPressed: _showNearbyStoresModal,
+                              icon: const Icon(Icons.storefront, size: 18),
+                              label: const Text('Cửa Hàng Gần', style: TextStyle(fontSize: 12)),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ] else ...[
+                      const Text(
+                        'Chỉ kích hoạt Bước 3 khi đã thực hiện Bước 2 hoặc cây có diễn biến xấu hơn.',
+                        style: TextStyle(fontSize: 12, color: Colors.grey, fontStyle: FontStyle.italic),
+                      ),
+                    ],
+                  ],
+                ),
+              ),
+            ),
             const SizedBox(height: 20),
 
-            // Nhóm nút nhắc lịch 3 ngày và đánh giá phục hồi 7 ngày (US-080, US-081)
+            // ================= CẬP NHẬT KẾT QUẢ ĐIỀU TRỊ =================
+            const Text(
+              'Đánh Giá Phục Hồi Của Cây:',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: AppTheme.neutralDark),
+            ),
+            const SizedBox(height: 8),
             Row(
               children: [
                 Expanded(
                   child: ElevatedButton.icon(
-                    onPressed: _reminderScheduled
-                        ? null
-                        : () {
-                            setState(() => _reminderScheduled = true);
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text('Đã đặt lịch nhắc phun xịt đợt 2 sau 3 ngày!'),
-                                backgroundColor: Color(0xFF2E7D32),
-                              ),
-                            );
-                          },
-                    icon: Icon(_reminderScheduled ? Icons.check_circle : Icons.alarm),
-                    label: Text(_reminderScheduled ? 'Đã Nhắc 3 Ngày' : 'Nhắc Xịt 3 Ngày'),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF2E7D32),
+                      backgroundColor: AppTheme.primaryGreen,
                       foregroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(vertical: 14),
+                      padding: const EdgeInsets.symmetric(vertical: 12),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                     ),
-                  ),
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: OutlinedButton.icon(
-                    onPressed: _auditScheduled
-                        ? null
-                        : () {
-                            setState(() => _auditScheduled = true);
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text('Đã lên lịch chụp ảnh đối chiếu phục hồi sau 7 ngày!'),
-                                backgroundColor: Color(0xFF0277BD),
-                              ),
-                            );
-                          },
-                    icon: Icon(_auditScheduled ? Icons.task_alt : Icons.history_edu),
-                    label: Text(_auditScheduled ? 'Đã Hẹn 7 Ngày' : 'Đánh Giá 7 Ngày'),
-                    style: OutlinedButton.styleFrom(
-                      foregroundColor: const Color(0xFF0277BD),
-                      side: const BorderSide(color: Color(0xFF0277BD)),
-                      padding: const EdgeInsets.symmetric(vertical: 14),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 24),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildBadge(IconData icon, String text, Color color) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      decoration: BoxDecoration(
-        color: color.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: color.withValues(alpha: 0.4)),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(icon, size: 14, color: color),
-          const SizedBox(width: 4),
-          Text(text, style: TextStyle(color: color, fontSize: 12, fontWeight: FontWeight.w600)),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildStepCard({
-    required String stepNumber,
-    required String title,
-    required Color color,
-    required IconData icon,
-    required List<Widget> content,
-  }) {
-    return Card(
-      elevation: 2,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                CircleAvatar(
-                  radius: 14,
-                  backgroundColor: color,
-                  child: Text(
-                    stepNumber,
-                    style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14),
+                    onPressed: () {
+                      appState.markDiseaseCured();
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('Chúc mừng! Chậu "$plantName" đã được cập nhật thành KHỎE MẠNH.'),
+                          backgroundColor: AppTheme.primaryGreen,
+                        ),
+                      );
+                    },
+                    icon: const Icon(Icons.sentiment_very_satisfied),
+                    label: const Text('Đã Khỏi Bệnh', style: TextStyle(fontWeight: FontWeight.bold)),
                   ),
                 ),
                 const SizedBox(width: 10),
-                Icon(icon, color: color, size: 20),
-                const SizedBox(width: 6),
                 Expanded(
-                  child: Text(
-                    title,
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: color),
+                  child: OutlinedButton.icon(
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: AppTheme.criticalRed,
+                      side: const BorderSide(color: AppTheme.criticalRed),
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    ),
+                    onPressed: () {
+                      appState.markDiseaseWorsened();
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Cảnh báo: Bệnh tăng nặng! Đã mở khóa khẩn cấp Bước 3 (Thuốc sinh học đặc trị).'),
+                          backgroundColor: AppTheme.criticalRed,
+                        ),
+                      );
+                    },
+                    icon: const Icon(Icons.warning_amber),
+                    label: const Text('Bệnh Nặng Hơn', style: TextStyle(fontWeight: FontWeight.bold)),
                   ),
                 ),
               ],
             ),
-            const Divider(height: 20),
-            ...content,
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildBullet(String label, String value) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 6),
-      child: RichText(
-        text: TextSpan(
-          style: const TextStyle(fontSize: 13, color: Color(0xFF334155), height: 1.4),
-          children: [
-            TextSpan(text: '$label ', style: const TextStyle(fontWeight: FontWeight.bold, color: Color(0xFF1E293B))),
-            TextSpan(text: value),
+            const SizedBox(height: 20),
           ],
         ),
       ),

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:urban_plants/core/theme.dart';
-import 'package:urban_plants/features/garden/screens/plant_catalog_screen.dart';
-import 'package:urban_plants/features/garden/screens/my_garden_screen.dart';
 import 'package:urban_plants/features/schedule/screens/smart_schedule_and_weather_screen.dart';
+import 'package:urban_plants/features/garden/screens/my_garden_screen.dart';
+import 'package:urban_plants/features/treatment/screens/safe_first_protocol_screen.dart';
+import 'package:urban_plants/features/voice/screens/voice_assistant_screen.dart';
 import 'package:urban_plants/features/profile/screens/profile_screen.dart';
-
 import 'package:urban_plants/features/diagnosis/screens/ai_camera_scanner_screen.dart';
 
 class HomeDashboardScreen extends StatefulWidget {
@@ -26,7 +26,8 @@ class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
     _screens = [
       const SmartScheduleAndWeatherScreen(),
       const MyGardenScreen(),
-      const PlantCatalogScreen(),
+      const SafeFirstProtocolScreen(),
+      const VoiceAssistantScreen(),
       ProfileScreen(userData: widget.userData),
     ];
   }
@@ -38,17 +39,19 @@ class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
         index: _currentIndex,
         children: _screens,
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      // NÚT CAMERA NỔI GÓC PHẢI (endFloat) - HOÀN TOÀN KHÔNG CHE CHỮ TRUNG TÂM VÀ KHÔNG ĐÈ TAB PHÁC ĐỒ
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppTheme.primaryGreen,
         elevation: 4,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
         onPressed: () {
           Navigator.push(
             context,
             MaterialPageRoute(builder: (_) => const AICameraScannerScreen()),
           );
         },
-        child: const Icon(Icons.qr_code_scanner, color: Colors.white, size: 28),
+        child: const Icon(Icons.camera_alt, color: Colors.white, size: 26),
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
@@ -57,11 +60,13 @@ class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
         unselectedItemColor: AppTheme.neutralMuted,
         showUnselectedLabels: true,
         type: BottomNavigationBarType.fixed,
+        selectedFontSize: 11,
+        unselectedFontSize: 10,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.wb_sunny_outlined),
             activeIcon: Icon(Icons.wb_sunny),
-            label: 'Lịch & Thời tiết',
+            label: 'Thời tiết',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.yard_outlined),
@@ -69,9 +74,14 @@ class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
             label: 'Vườn của tôi',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.menu_book_outlined),
-            activeIcon: Icon(Icons.menu_book),
-            label: 'Bách khoa',
+            icon: Icon(Icons.medical_services_outlined),
+            activeIcon: Icon(Icons.medical_services),
+            label: 'Phác đồ',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.mic_none_outlined),
+            activeIcon: Icon(Icons.mic),
+            label: 'Giọng nói',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person_outline),

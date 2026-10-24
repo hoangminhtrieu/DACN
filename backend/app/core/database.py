@@ -2,10 +2,22 @@ from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sess
 from sqlalchemy.orm import declarative_base
 from app.core.config import settings
 
+engine_kwargs = {
+    "echo": settings.DEBUG,
+    "future": True,
+}
+
+if "sqlite" in settings.ASYNC_DATABASE_URL:
+    engine_kwargs["connect_args"] = {"check_same_thread": False}
+else:
+    # Cấu hình tối ưu connection pool cho Cloud PostgreSQL trên Railway
+    engine_kwargs["pool_size"] = 10
+    engine_kwargs["max_overflow"] = 20
+    engine_kwargs["pool_pre_ping"] = True
+
 engine = create_async_engine(
-    settings.DATABASE_URL,
-    echo=settings.DEBUG,
-    future=True
+    settings.ASYNC_DATABASE_URL,
+    **engine_kwargs
 )
 
 AsyncSessionLocal = async_sessionmaker(

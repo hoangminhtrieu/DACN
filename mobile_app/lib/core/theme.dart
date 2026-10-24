@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 class AppTheme {
   static const Color primaryGreen = Color(0xFF2D6A4F);
+  static const Color primaryDark = Color(0xFF1B4332);
   static const Color secondaryGreen = Color(0xFF52B788);
+  static const Color accentGreen = Color(0xFF40916C);
   static const Color mintSurface = Color(0xFFE8F5E9);
   static const Color alertOrange = Color(0xFFE76F51);
   static const Color criticalRed = Color(0xFFD62828);

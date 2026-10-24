@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:urban_plants/core/theme.dart';
+import 'package:urban_plants/core/app_state.dart';
 import 'package:urban_plants/features/auth/screens/login_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const UrbanPlantsApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => AppState()..updateCurrentDeviceLocation(),
+      child: const UrbanPlantsApp(),
+    ),
+  );
 }
 
 class UrbanPlantsApp extends StatelessWidget {

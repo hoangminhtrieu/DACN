@@ -59,7 +59,18 @@ class _LoginScreenState extends State<LoginScreen> {
           backgroundColor: AppTheme.primaryGreen,
         ),
       );
-      // Điều hướng vào màn hình chính
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (_) => const HomeDashboardScreen(userData: {
+            'id': 'usr_trieu',
+            'full_name': 'Hoàng Minh Triều',
+            'email': 'trieu.urbanplants@gmail.com',
+            'role': 'USER',
+            'location_city': 'TP. Hồ Chí Minh',
+          }),
+        ),
+      );
     }
   }
 
